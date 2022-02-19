@@ -89,6 +89,13 @@ form.create-entry label:not(:first-of-type) {
 
 .pseudo-label {
   padding-bottom: 3rem;
+  position: relative;
+}
+
+a.edit-markdown {
+  position: absolute;
+  top: 0;
+  right: 2rem;
 }
 
 input[type="text"],
