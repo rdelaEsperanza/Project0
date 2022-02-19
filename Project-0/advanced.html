@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Google Advanced Search</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="stylesheets/style.css">
+    </head>
+    <body>
+        <header class="space-between">
+            <!--adding redundant logo link just to match google's advanced page rendering-->
+            <a href="index.html"><img src="images/google-logo.png" aria-hidden="true"><span class="visuallyhidden">Back to Google Search</span></a>
+            <a href="index.html">&#8592 Google Search</a>
+        </header>
+        <main class="advanced">
+            <h1>Advanced Search</h1>
+            <form action="https://google.com/search" name="f">
+                <div class="top-headers flex-wrapper">
+                    <span>Find pages with&hellip;</span>
+                    <u></u>
+                    <span>To do this in the search box</span>
+                </div>
+                <label class="flex-wrapper">
+                    <span>all these words:</span>
+                    <input name="as_q" type="text">
+                    <span>Type the important words: <i> tricolor rat terrier</i></span>
+                </label>
+                <label class="flex-wrapper">
+                    <span>this exact word or phrase:</span>
+                    <input name="as_epq" type="text">
+                    <span>Put exact words in quotes: <i> "rat terrier"</i></span>
+                </label>
+                <label class="flex-wrapper">
+                    <span>any of these words:</span>
+                    <input name="as_oq" type="text">
+                    <span>Type OR between all the words you want: <i> miniature OR standard</i></span>
+                </label>
+                <label class="flex-wrapper">
+                    <span>none of these words:</span>
+                    <input name="as_eq" type="text">
+                    <span>Put a minus sign just before words you don't want: <i> -rodent, -"Jack Russell"</i></span>
+                </label>
+                <div class="flex-wrapper">
+                    <span></span>
+                    <div class="call-to-action">
+                        <input type="submit" class="secondary" value="Advanced Search">
+                    </div>
+                    <span></span>
+                </div>
+                
+            </form>
+        </main>
+        <footer>
+            <span>CSCI E-33a</span>
+            <span>Project 0</span>
+            <span>Reina McCuskey</span>
+        </footer>
+    </body>
+</html>

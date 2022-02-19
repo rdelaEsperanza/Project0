@@ -1,0 +1,238 @@
+main.advanced form .flex-wrapper {
+  display: flex;
+}
+
+body input[type=submit] {
+  font-size: 1.4rem;
+  margin: 1.1rem 0.4rem;
+  padding: 0 1.6rem;
+  line-height: 2.7rem;
+  height: 3.6rem;
+  min-width: 5.4rem;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+main .search-field-wrapper input[type=text] {
+  border-color: transparent;
+  font-size: 1.6rem;
+  height: 3.4rem;
+}
+
+header a {
+  vertical-align: middle;
+  text-decoration: none;
+}
+header a:hover {
+  text-decoration: underline;
+}
+
+main .search-field-wrapper {
+  display: flex;
+  align-items: center;
+  height: 4.4rem;
+  border: thin solid #dfe1e5;
+  border-radius: 2.4rem;
+  padding: 0 1rem;
+  margin: 0 auto 2rem;
+  width: auto;
+  max-width: 58.4rem;
+}
+
+.visuallyhidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Roboto", arial, sans-serif;
+  font-size: 1.4rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+body input[type=submit].primary {
+  background-color: #f8f9fa;
+  color: #3c4043;
+  border: thin solid #f8f9fa;
+  border-radius: 0.4rem;
+}
+body input[type=submit].primary:hover {
+  border: thin solid #dadce0;
+  color: #202124;
+}
+body input[type=submit].secondary {
+  background-color: #4d90fe;
+  color: #fff;
+  border: thin solid #3079ed;
+  border-radius: 0.2rem;
+}
+body input[type=submit].secondary:hover {
+  background-color: #357ae8;
+}
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 6rem;
+  padding: 1rem 2rem;
+}
+header a {
+  font-size: 1.3rem;
+  padding-left: 1.5rem;
+  color: rgba(0, 0, 0, 0.87);
+}
+header.space-between {
+  justify-content: space-between;
+}
+header.space-between img {
+  width: 8rem;
+}
+
+main {
+  min-height: calc(100vh - 15rem);
+  text-align: center;
+  padding: 1rem 0;
+}
+main .logo-wrapper {
+  margin-top: 6rem;
+  text-align: center;
+}
+main .logo-wrapper span {
+  margin-left: -6rem;
+  color: #4285f4;
+  font-size: 1.6rem;
+}
+main form {
+  padding: 2rem 3rem;
+}
+main .search-field-wrapper .glass-wrapper {
+  color: #9aa0a6;
+  height: 2rem;
+  width: 2rem;
+  padding: 0.5rem 1.5rem;
+}
+main .search-field-wrapper input[type=text] {
+  flex-grow: 2;
+  outline: none;
+}
+main .search-field-wrapper .camera-wrapper {
+  height: 2.4rem;
+  width: 2.4rem;
+  background: url("../images/camera.png") 0 0 no-repeat;
+  background-size: 2.4rem;
+}
+main .search-field-wrapper .voice-wrapper {
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0.5rem 1.5rem;
+}
+main .search-field-wrapper button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding-right: 1.3rem;
+  width: 4.5rem;
+  height: 4.5rem;
+}
+main .search-field-wrapper button svg {
+  padding-top: 0.25rem;
+  fill: #4285f4;
+}
+main.advanced {
+  text-align: left;
+}
+main.advanced h1 {
+  color: #d93025;
+  font-size: 2rem;
+  font-weight: 400;
+  padding: 0 3rem 3rem;
+  border-bottom: thin solid #ddd;
+}
+main.advanced form .flex-wrapper {
+  align-items: center;
+  padding-bottom: 1.5rem;
+}
+main.advanced form .flex-wrapper span:first-of-type {
+  color: #222;
+  font-size: 1.3rem;
+  width: 16%;
+  min-width: 16.7rem;
+}
+main.advanced form .flex-wrapper span:last-of-type {
+  color: #555;
+  font-size: 1.1rem;
+  width: 32%;
+  min-width: 16rem;
+  margin: 0 0 0 1%;
+}
+main.advanced form .flex-wrapper span:last-of-type i {
+  color: #666;
+  font-family: monospace;
+  font-style: normal;
+  padding-left: 0.25rem;
+}
+main.advanced form .flex-wrapper u {
+  padding: 0.1rem 0.8rem;
+  width: 50%;
+  min-width: 16.7rem;
+  height: 2.5rem;
+}
+main.advanced form .flex-wrapper input[type=text] {
+  font-size: 1.3rem;
+  padding: 0.1rem 0.8rem;
+  border: thin solid #d9d9d9;
+  border-top: thin solid #c0c0c0;
+  border-radius: 0.1rem;
+  width: 50%;
+  min-width: 16.7rem;
+  height: 2.5rem;
+}
+main.advanced form .flex-wrapper .call-to-action {
+  width: 52%;
+  text-align: right;
+}
+main.advanced form .flex-wrapper .call-to-action input[type=submit].secondary {
+  font-size: 1.1rem;
+  height: 3rem;
+}
+main.advanced form .flex-wrapper.top-headers span:first-of-type {
+  color: #333;
+  font-size: 1.6rem;
+}
+main.advanced form .flex-wrapper.top-headers span:last-of-type {
+  color: #777;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+@media (max-width: 1070px) {
+  main.advanced form .flex-wrapper {
+    flex-wrap: wrap;
+  }
+  main.advanced form .flex-wrapper span:last-of-type {
+    padding-top: 1rem;
+    margin-left: 16.7rem;
+  }
+}
+
+footer {
+  padding: 2rem;
+  background-color: #f8f8f8;
+  color: #70757a;
+  display: flex;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=style.css.map */
