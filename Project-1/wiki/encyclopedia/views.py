@@ -29,30 +29,6 @@ def index(request):
         "entries": util.list_entries()
     })
 
-#Define create page view
-def create(request):
-    if request.method == "POST":
-        form = NewEntryForm(request.POST)
-        if form.is_valid():
-            entry_title = form.cleaned_data["entry_title"],
-            entry_markdown = form.cleaned_data["entry_markdown"]
-            return HttpResponseRedirect(reverse("encyclopedia:entry"), {
-                "entry_title": title.capitalize()
-            })
-        else:
-            return render(request, "encyclopedia/create.html", {
-                "form": form
-            })
-
-
-    return render(request, "encyclopedia/create.html", {
-        "form": NewEntryForm()
-    })
-
-#Define error page view
-def error(request):
-    return render(request, "encyclopedia/error.html")
-
 #Define entry page view
 def entry(request, title):
     entry_string = util.get_entry(title)
@@ -68,6 +44,45 @@ def entry(request, title):
             "error_message": error_message
         }) 
 
+#Define create page view
+def create(request):
+    if request.method == "POST":
+        form = NewEntryForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["entry_title"]
+            entry_markdown = form.cleaned_data["entry_markdown"]
+            print(title)
+            util.save_entry(title, entry_markdown)
+            # return HttpResponseRedirect(reverse(entry, args=(title,)))
+            converted_md = markdowner.convert(entry_markdown)
+            return render(request, "encyclopedia/entry.html", {
+                "title": title.capitalize(),
+                "markdown": converted_md
+            })
+        else:
+            return render(request, "encyclopedia/create.html", {
+                "form": form
+            })
+
+
+    return render(request, "encyclopedia/create.html", {
+        "form": NewEntryForm()
+    })
+
+#Define error page view
+def error(request):
+    return render(request, "encyclopedia/error.html")
+
+
+
 #Define search page view
-def search(request):
-    return render(request, "encyclopedia/search.html")
+def search(request, title):
+    entry_string = util.get_entry(title)
+    if entry_string:
+            converted_md = markdowner.convert(entry_string)
+            return render(request, "encyclopedia/entry.html", {
+                "title": title.capitalize(),
+                "markdown": converted_md
+            })
+    else:
+        return render(request, "encyclopedia/search.html")

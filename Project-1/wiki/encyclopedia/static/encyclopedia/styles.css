@@ -89,12 +89,11 @@ form.create-entry label:not(:first-of-type) {
 
 .pseudo-label {
   padding-bottom: 3rem;
-  position: relative;
 }
 
 a.edit-markdown {
   position: absolute;
-  top: 0;
+  top: 10rem;
   right: 2rem;
 }
 
@@ -112,6 +111,7 @@ textarea {
 main {
   padding: 2rem;
   flex-grow: 2;
+  position: relative;
 }
 
 ul.entries li {
