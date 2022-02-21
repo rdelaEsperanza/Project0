@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Entry - {{ title }}</h1>
+    <h1>Random Entry - {{ title }}</h1>
+    
     <div class="pseudo-label">
         <b>Title</b>
         <span>{{ title }}</span>
@@ -13,10 +14,8 @@
 
     <div class="pseudo-label">
         <b>Markdown</b>
-        <span>{{ markdown|safe }}</span>   
+        <span>{{ markdown|safe }}</span>
     </div>
-
-    <a href="{% url 'encyclopedia:edit' title %}" class="edit-markdown"><i class="fa-solid fa-pen"></i> Edit</a>
-
+   
 
 {% endblock %}

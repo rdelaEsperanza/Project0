@@ -17,6 +17,15 @@ code {
   white-space: pre;
 }
 
+a,
+a:visited {
+  color: #325794;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 header {
   padding: 2rem;
   text-align: center;
@@ -94,7 +103,19 @@ form.create-entry label:not(:first-of-type) {
 a.edit-markdown {
   position: absolute;
   top: 10rem;
-  right: 2rem;
+  right: 4rem;
+}
+
+input[type="submit"] {
+  color: white;
+  padding: 1rem 3rem;
+  margin-top: 2rem;
+  background-image: linear-gradient(174.2deg, #325794, #173669 66.72%, #304569);
+  border: thin solid #325794;
+}
+
+input[type="submit"]:hover {
+  background-image: linear-gradient(174.2deg, #304569, #173669 66.72%, #325794);
 }
 
 input[type="text"],
