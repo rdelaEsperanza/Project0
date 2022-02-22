@@ -1,0 +1,77 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  background-color: white;
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  font-size: 1.6rem;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+a,
+a:visited {
+  color: #325794;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.flex-wrapper {
+  display: flex;
+}
+
+header {
+  padding: 2rem;
+  text-align: center;
+  background-color: #f8f8f8;
+  border-bottom: 0.5rem solid #fff;
+}
+
+header div b {
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+nav.flex-wrapper {
+  justify-content: space-between;
+}
+
+nav .page-links a {
+  margin-right: 2rem;
+}
+
+nav .signed-in a,
+nav .not-signed-in a {
+  margin-left: 2rem;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 5rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.main-content-wrapper {
+  min-height: calc(100vh - 18rem);
+}
+
+main {
+  padding: 2rem;
+  position: relative;
+}
+
+footer {
+  padding: 2rem;
+  background-color: #f8f8f8;
+  border-top: 0.5rem solid #fff;
+  color: #70757a;
+  display: flex;
+  justify-content: space-between;
+}
