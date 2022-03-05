@@ -11,34 +11,49 @@
         <div>
             <p><b>Title: </b>{{ listing.title}}</p>
             <p><b>Description: </b>{{ listing.description}}</p>
-            <p><b>Category: </b>{{ category.title}}</p>
+            <p><b>Category: </b>{{ listing.category}}</p>
             <p><b>Listing Owner: </b>{{ user.username}}</p>
-            <p><b>Starting Bid: </b>{{ listing.starting_bid}}</p>
-            <p><b>Current Bid: </b>{{ listing.current_bid}}</p>
+            
 
             
         </div>
         <img src="static/{{ listing.image }}" />
     </div>
-    <form class="bid-watchlist-comment" action="{% url 'auctions:listing' listing.id %}" method="POST">
+    <form class="bid-watchlist-comment" action="{% url 'auctions:userChange' listing.id %}" method="POST">
         {% csrf_token %}
-        <span class="winning-bid-message"> </span>
-        <label class="enter-bid">
-            <b>Enter a bid: </b>
-            <input type="number" step="any" />
-        </label>
-        <div class="pseudo-label">
-            <label>
-                <input type="radio" name="watchlist-status" value="Add to Watchlist" /> Add to Watchlist
+        <div class="detail">
+            <h2>Bids</h2>
+            <p><b>Starting Bid: </b>{{ listing.starting_bid}}</p>
+            <p><b>Current Bid: </b>{{ listing.current_bid}}</p>
+            <label class="enter-bid">
+                <b>Enter a bid: </b>
+                <input type="number" step="any" />
             </label>
-            <label>
-                <input type="radio" name="watchlist-status" value="Remove from Watchlist" /> Remove from Watchlist
-            </label>
+            <div class="pseudo-label">
+                <h2>Watchlists</h2>
+                <select name="watchlist" id="">
+                    {% for watchlist in non_watchists %}
+                        <option value="{{ user.id }}"> {{ user }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="comments">
+                <h2>Comments</h2>
+                <label>
+                    <b>New Comment:</b>
+                    <textarea></textarea>
+                </label>
+                <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
+                <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
+                <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
+            </div>
         </div>
-        <div class="Comments">
-
+        <div class="legal-submit">
+            <b>Legal Disclaimer</b>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu non sodales neque sodales. Nulla facilisi nullam vehicula ipsum a arcu cursus. Proin libero nunc consequat interdum varius sit amet mattis. Non arcu risus quis varius. Ut pharetra sit amet aliquam id diam maecenas ultricies. Egestas fringilla phasellus faucibus scelerisque. Nisl suscipit adipiscing bibendum est ultricies. Varius duis at consectetur lorem donec massa sapien faucibus. Ut tellus elementum sagittis vitae et leo duis ut diam. Commodo nulla facilisi nullam vehicula ipsum a.</p>
+            <input type="submit" value="Submit Changes" />
         </div>
-        <input type="submit" />
+        
     </form>
     
 </main>

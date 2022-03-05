@@ -18,7 +18,7 @@
                     <a class="nav-link" href="{% url 'auctions:index' %}">Active Listings</a>
                     <a class="nav-link" href="{% url 'auctions:categories' %}">Categories</a>
                     {% if user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'auctions:watchlist' %}">Watchlist</a>
+                        <a class="nav-link" href="{% url 'auctions:watchlist' user.id %}">Watchlist</a>
                         <a class="nav-link" href="{% url 'auctions:create' %}">New Listing</a>
                     {% endif %}
                 </div>

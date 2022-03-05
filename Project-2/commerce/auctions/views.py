@@ -81,12 +81,6 @@ def create(request):
         form = NewListingForm(request.POST)
         
         if form.is_valid():
-            # title = form.cleaned_data["title"]
-            # description = form.cleaned_data["description"]
-            # image_url = form.cleaned_data["image_url"]
-            # starting_bid = forms.DecimalField(hep_text="What is the minimum acceptable bid?")
-            # user = forms.CharField()
-            # category = forms.Charfield(label="Category")
             form.save()
             message = "Success! New listing saved. Add another?"
             return render(request, "auctions/create.html", {
@@ -103,21 +97,35 @@ def create(request):
     })
 
 #Individual Listing Page View
-
 def listing(request, listing_id):
     listing = Listing.objects.get(id = listing_id)
+    watchlists = listing.watchlists.all()
+    # non_watchlists = Users.objects.exclude(listings=listing).all()
     winning_bid_message = "Congratulations! Yours was the winning bid."
     return render(request, "auctions/listing.html", {
         "listing": listing,
+        "watchlists": watchlists,
+        # "non_watchlists": non_watchlists,
         "winning_bid_message": winning_bid_message
     })
 
+#Change Form on Listing Page
+def userChange(request, listing_id):
+    if request.method=="POST":
+        listing = Listing.objects.get(pk=listing_id)
+        # user_id = int(request.POST["user"])
+        # user = User.objects.get(pk="user_id")
+        listing.watchlists.add(watchlist)
+        return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+
 #Watchlist Page View   
-def watchlist(request):
-    user = request.user.username
+def watchlist(request, user_id):
+    user = User.objects.get(id = user_id)
+    watchlists = user.watchlists.all()
+    print(user)
     return render(request, "auctions/watchlist.html", {
-        "Listings": Listing.objects.all(),
-        "user": user
+        "user": user,
+        "watchlists": watchlists
     })
 
 #Categories Page View 
@@ -127,9 +135,11 @@ def categories(request):
     })
 
 #Individual Category Page View
-def category(request, category_id):
-    category = Category.objects.get(id = category_id)
-    return render(request, "auctions/category.html", {
-        "category": category
-    })
+# def category(request, category_id):
+#     category = Category.objects.get(id = category_id)
+#     return render(request, "auctions/category.html", {
+#         "category": category
+#     })
+
+
 

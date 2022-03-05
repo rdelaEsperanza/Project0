@@ -62,9 +62,11 @@ label {
   font-weight: 600;
 }
 
-.pseudo-label label {
+.pseudo-label label,
+.pseudo-label select {
   display: inline-block;
-  margin: 3rem 3rem 3rem 0;
+  margin: 0 2rem 5rem 0;
+  font-weight: 400;
 }
 
 .flex-wrapper {
@@ -181,24 +183,53 @@ main.listing .flex-wrapper {
   padding-top: 2rem;
 }
 
+main.listing h2 {
+  margin-top: 0;
+}
+
 main.listing p {
   text-align: left;
 }
 
 main.listing img {
-  width: 40rem;
+  width: 30rem;
   margin-right: 3rem;
 }
 
 main.listing form.bid-watchlist-comment {
+  display: flex;
   width: 100%;
-  margin-top: 3rem;
+  margin-top: 6rem;
   padding-top: 3rem;
   border-top: 2rem dotted #dddddd;
 }
 
+main.listing form.bid-watchlist-comment .detail {
+  flex-grow: 2;
+  padding-right: 2rem;
+}
+
+main.listing form.bid-watchlist-comment .detail span {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+main.listing form.bid-watchlist-comment .detail p {
+  margin-top: 0;
+}
+
+main.listing form.bid-watchlist-comment .legal-submit {
+  width: 40rem;
+  align-self: center;
+}
+
+main.listing form.bid-watchlist-comment .legal-submit p {
+  color: #666;
+}
+
 main.listing form.bid-watchlist-comment label {
   font-size: 1.6rem;
+  margin-bottom: 5rem;
 }
 main.listing form.bid-watchlist-comment label input[type="number"] {
   width: 15rem;
@@ -207,6 +238,19 @@ main.listing form.bid-watchlist-comment label input[type="number"] {
 main.listing form.bid-watchlist-comment label b {
   display: block;
   padding-bottom: 0.5rem;
+}
+
+main.listing form.bid-watchlist-comment .pseudo-label select {
+  width: 70%;
+}
+
+main.listing form.bid-watchlist-comment .comments label {
+  margin-bottom: 2rem;
+}
+
+main.listing form.bid-watchlist-comment .comments textarea {
+  min-height: 10rem;
+  width: 70%;
 }
 
 footer {

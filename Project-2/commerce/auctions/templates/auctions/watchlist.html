@@ -7,15 +7,13 @@
 {% block body %}
 <main>
     <h1>My Watchlists</h1>
-    <!-- <ul>
-        {% for listing in listings %}
+    <ul>
+        {% for watchlist in watchlists %}
             <li class="active-listings">
-                <a href="{% url 'auctions:listing' listing %}">Listing {{ listing.id}}: {{ listing.title}} </a>
-                <img src="static/{{ listing.image }}"/>
-                <p><b>Current Bid: </b> $999.99</p>
+                {{ watchlist }}
             </li>
         {% endfor %}
-    </ul> -->
+    </ul>
     
 </main>
 {% endblock %}
