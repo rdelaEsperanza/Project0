@@ -8,9 +8,9 @@
 <main>
     <h1>My Watchlists</h1>
     <ul>
-        {% for watchlist in watchlists %}
+        {% for listing in watchlists %}
             <li class="active-listings">
-                {{ watchlist }}
+                <a href="{% url 'auctions:listing' listing.id %}">Listing #{{ listing.id}}: {{ listing.title }}</a>
             </li>
         {% empty %}
             <p>You have no assigned watchlists.</p>

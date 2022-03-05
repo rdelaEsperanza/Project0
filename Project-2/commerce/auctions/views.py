@@ -109,23 +109,32 @@ def listing(request, listing_id):
         "winning_bid_message": winning_bid_message
     })
 
-#Change Form on Listing Page
-def userChange(request, listing_id):
+#Bid Form on Listing Page
+def bidForm(request, listing_id):
     if request.method=="POST":
         listing = Listing.objects.get(pk=listing_id)
         # user_id = int(request.POST["user"])
         # user = User.objects.get(pk="user_id")
-        listing.watchlists.add(watchlist)
+        return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+
+#Comments Form on Listing Page
+def commentForm(request, listing_id):
+    if request.method=="POST":
+        listing = Listing.objects.get(pk=listing_id)
+        # user_id = int(request.POST["user"])
+        # user = User.objects.get(pk="user_id")
         return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
 
 #Watchlist Page View   
 def watchlist(request, user_id):
     user = User.objects.get(id = user_id)
     watchlists = user.watchlists.all()
+    listings = Listing.objects.all()
     print(user)
     return render(request, "auctions/watchlist.html", {
         "user": user,
-        "watchlists": watchlists
+        "watchlists": watchlists,
+        "listings": listings
     })
 
 #Categories Page View 
@@ -137,7 +146,7 @@ def categories(request):
 # Individual Category Page View
 def category(request, category_id):
     category = Category.objects.get(id = category_id)
-    listings = Listing.objects.filter(listing.category == category)
+    listings = Listing.objects.filter(category = category)
     return render(request, "auctions/category.html", {
         "category": category,
         "listings": listings

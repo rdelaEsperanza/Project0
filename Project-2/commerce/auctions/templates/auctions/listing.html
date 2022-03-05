@@ -19,7 +19,21 @@
         </div>
         <img src="static/{{ listing.image }}" />
     </div>
-    <form class="bid-watchlist-comment" action="{% url 'auctions:userChange' listing.id %}" method="POST">
+   <!-- if listing in user.objects.watchlists.all()  
+    add remove watchlist code
+    else show add watchlist
+    <div class="pseudo-label">
+                <h2>Watchlist Status</h2>
+                <label>
+                    <input type="radio" name="watchlist-status" value="Add to Watchlist" /> Add to Watchlist
+                </label>
+                <label>
+                    <input type="radio" name="watchlist-status" value="Remove from Watchlist" /> Remove from Watchlist
+                </label>
+            </div>
+-->
+
+    <form class="bid-watchlist-comment" action="{% url 'auctions:bidForm' listing.id %}" method="POST">
         {% csrf_token %}
         <div class="detail">
             <h2>Bids</h2>
@@ -29,32 +43,24 @@
                 <b>Enter a bid: </b>
                 <input type="number" step="any" />
             </label>
-            <div class="pseudo-label">
-                <h2>Watchlist Status</h2>
-                <label>
-                    <input type="radio" name="watchlist-status" value="Add to Watchlist" /> Add to Watchlist
-                </label>
-                <label>
-                    <input type="radio" name="watchlist-status" value="Remove from Watchlist" /> Remove from Watchlist
-                </label>
-            </div>
+            <input type="submit" value="Submit Bid" />
+        </div> 
+    </form> 
+    <form class="bid-watchlist-comment" action="{% url 'auctions:commentForm' listing.id %}" method="POST">
+        {% csrf_token %}
+        <div class="detail">
             <div class="comments">
                 <h2>Comments</h2>
                 <label>
                     <b>New Comment:</b>
                     <textarea></textarea>
                 </label>
+                <input type="submit" value="Post Comment" />
+                <!-- <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
                 <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
-                <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
-                <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
+                <div><span>(username)</span><p>Previous comment blah blah blah</p></div> -->
             </div>
         </div>
-        <div class="legal-submit">
-            <b>Legal Disclaimer</b>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu non sodales neque sodales. Nulla facilisi nullam vehicula ipsum a arcu cursus. Proin libero nunc consequat interdum varius sit amet mattis. Non arcu risus quis varius. Ut pharetra sit amet aliquam id diam maecenas ultricies. Egestas fringilla phasellus faucibus scelerisque. Nisl suscipit adipiscing bibendum est ultricies. Varius duis at consectetur lorem donec massa sapien faucibus. Ut tellus elementum sagittis vitae et leo duis ut diam. Commodo nulla facilisi nullam vehicula ipsum a.</p>
-            <input type="submit" value="Submit Changes" />
-        </div>
-        
     </form>
     
 </main>

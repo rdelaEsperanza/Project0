@@ -5,11 +5,6 @@ from django.db import models
 
 
 class User(AbstractUser):
-    username = models.CharField(max_length=50, unique = True)
-    password = models.CharField(max_length=50)
-    first_name = models.CharField(max_length=25)
-    last_name = models.CharField(max_length = 50)
-    email = models.EmailField(max_length = 254, unique = True)
     watchlists = models.ManyToManyField("Listing", blank=True, related_name="watchlists")
 
     # def __str__(self):
