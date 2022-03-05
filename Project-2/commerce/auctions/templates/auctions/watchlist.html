@@ -12,6 +12,8 @@
             <li class="active-listings">
                 {{ watchlist }}
             </li>
+        {% empty %}
+            <p>You have no assigned watchlists.</p>
         {% endfor %}
     </ul>
     

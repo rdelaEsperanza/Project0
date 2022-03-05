@@ -131,15 +131,15 @@ def watchlist(request, user_id):
 #Categories Page View 
 def categories(request):
     return render(request, "auctions/categories.html", {
-        "Categories": Category.objects.all()
+        "categories": Category.objects.all()
     })
 
 #Individual Category Page View
-# def category(request, category_id):
-#     category = Category.objects.get(id = category_id)
-#     return render(request, "auctions/category.html", {
-#         "category": category
-#     })
+def category(request, category_id):
+    category = Category.objects.get(id = category_id)
+    return render(request, "auctions/category.html", {
+        "category": category
+    })
 
 
 

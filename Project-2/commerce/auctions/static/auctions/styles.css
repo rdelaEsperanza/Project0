@@ -179,7 +179,7 @@ main.register-page label b {
 
 main.listing .flex-wrapper {
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   padding-top: 2rem;
 }
 

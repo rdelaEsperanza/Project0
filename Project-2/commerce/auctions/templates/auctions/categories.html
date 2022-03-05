@@ -5,13 +5,12 @@
 {% endblock %}
 
 {% block body %}
-    <main>
+    <main class="categories">
         <h1>Auction Categories</h1>
         <ul>
             {% for category in categories %}
                 <li class="categories">
-                    {{ category.id }}: {{ category.title }} 
-                    <!-- <a href="{% url 'auctions:category' category.id %}"></a> -->
+                    <a href="{% url 'auctions:category' category.id %}">{{ category.id }}: {{ category.title }} </a>
                 </li>
             {% endfor %}
         </ul>
