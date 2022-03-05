@@ -19,6 +19,8 @@
         </div>
         <img src="static/{{ listing.image }}" />
     </div>
+    <!-- if user is owner then show close button -->
+
    <!-- if listing in user.objects.watchlists.all()  
     add remove watchlist code
     else show add watchlist
@@ -41,7 +43,7 @@
             <p><b>Current Bid: </b>{{ listing.current_bid}}</p>
             <label class="enter-bid">
                 <b>Enter a bid: </b>
-                <input type="number" step="any" />
+                <input type="number" step="any" name="bid_amount">
             </label>
             <input type="submit" value="Submit Bid" />
         </div> 
@@ -56,10 +58,8 @@
                     <textarea></textarea>
                 </label>
                 <input type="submit" value="Post Comment" />
-                <!-- <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
-                <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
-                <div><span>(username)</span><p>Previous comment blah blah blah</p></div> -->
             </div>
+            <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
         </div>
     </form>
     

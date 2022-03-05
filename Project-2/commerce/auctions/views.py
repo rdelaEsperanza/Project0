@@ -99,11 +99,15 @@ def create(request):
 #Individual Listing Page View
 def listing(request, listing_id):
     listing = Listing.objects.get(id = listing_id)
+    bids = listing.bids.all()
     watchlists = listing.watchlists.all()
+    # user = request.user
+    # print(user)
     # non_watchlists = Users.objects.exclude(listings=listing).all()
     winning_bid_message = "Congratulations! Yours was the winning bid."
     return render(request, "auctions/listing.html", {
         "listing": listing,
+        "bids": bids,
         "watchlists": watchlists,
         # "non_watchlists": non_watchlists,
         "winning_bid_message": winning_bid_message
@@ -113,8 +117,11 @@ def listing(request, listing_id):
 def bidForm(request, listing_id):
     if request.method=="POST":
         listing = Listing.objects.get(pk=listing_id)
-        # user_id = int(request.POST["user"])
-        # user = User.objects.get(pk="user_id")
+        bids = listing.bids.all()
+        user = request.user
+        bid_amount = int(request.POST["bid_amount"])
+        current_bid = int(request.POST["bid_amount"])
+        bid.listings.add(listing)
         return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
 
 #Comments Form on Listing Page
