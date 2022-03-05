@@ -1,0 +1,45 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    Listing {{ title }}
+{% endblock %}
+
+{% block body %}
+<main class="listing">
+    <h1>Listing: {{ listing.title }}</h1>
+    <div class="flex-wrapper">
+        <div>
+            <p><b>Title: </b>{{ listing.title}}</p>
+            <p><b>Description: </b>{{ listing.description}}</p>
+            <p><b>Category: </b>{{ category.title}}</p>
+            <p><b>Listing Owner: </b>{{ user.username}}</p>
+            <p><b>Starting Bid: </b>{{ listing.starting_bid}}</p>
+            <p><b>Current Bid: </b>{{ listing.current_bid}}</p>
+
+            
+        </div>
+        <img src="static/{{ listing.image }}" />
+    </div>
+    <form class="bid-watchlist-comment" action="{% url 'auctions:listing' listing.id %}" method="POST">
+        {% csrf_token %}
+        <span class="winning-bid-message"> </span>
+        <label class="enter-bid">
+            <b>Enter a bid: </b>
+            <input type="number" step="any" />
+        </label>
+        <div class="pseudo-label">
+            <label>
+                <input type="radio" name="watchlist-status" value="Add to Watchlist" /> Add to Watchlist
+            </label>
+            <label>
+                <input type="radio" name="watchlist-status" value="Remove from Watchlist" /> Remove from Watchlist
+            </label>
+        </div>
+        <div class="Comments">
+
+        </div>
+        <input type="submit" />
+    </form>
+    
+</main>
+{% endblock %}

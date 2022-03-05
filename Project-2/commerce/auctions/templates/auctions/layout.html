@@ -15,24 +15,24 @@
             <div><b>Project 2 - Auctions</b></div>
             <nav class="flex-wrapper">
                 <div class="page-links">
-                    <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
-                    <a class="nav-link" href="#">Categories</a>
+                    <a class="nav-link" href="{% url 'auctions:index' %}">Active Listings</a>
+                    <a class="nav-link" href="{% url 'auctions:categories' %}">Categories</a>
                     {% if user.is_authenticated %}
-                        <a class="nav-link" href="#">Watchlist</a>
-                        <a class="nav-link" href="#">New Listing</a>
+                        <a class="nav-link" href="{% url 'auctions:watchlist' %}">Watchlist</a>
+                        <a class="nav-link" href="{% url 'auctions:create' %}">New Listing</a>
                     {% endif %}
                 </div>
                 
                 {% if user.is_authenticated %}
                     <div class="signed-in">
                         <span>Welcome <strong>{{ user.username }}</strong>!</span>
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                        <a class="nav-link" href="{% url 'auctions:logout' %}">Log Out</a>
                     </div>
                 {% else %}
                     <div class="not-signed-in">
                         <span>Not signed in.</span>
-                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        <a class="nav-link" href="{% url 'auctions:login' %}">Log In</a>
+                        <a class="nav-link" href="{% url 'auctions:register' %}">Register</a>
                     </div>
                 {% endif %}
             </nav>

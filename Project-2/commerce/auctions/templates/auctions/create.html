@@ -3,6 +3,11 @@
 {% block body %}
 <main>
     <h1>Create a Listing</h1>
-    
+    <p class="success-message">{{ message }}</p>
+    <form class="create-listing" action="{% url 'auctions:create' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit">
+    </form>
 </main>
 {% endblock %}

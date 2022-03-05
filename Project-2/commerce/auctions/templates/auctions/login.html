@@ -12,7 +12,7 @@
             <div>{{ message }}</div>
         {% endif %}
 
-        <form action="{% url 'login' %}" method="post">
+        <form action="{% url 'auctions:login' %}" method="post">
             {% csrf_token %}
             <label>
                 <b>Username</b>
@@ -25,7 +25,7 @@
             <input aria-label="submit login" type="submit" value="Login">
         </form>
 
-        Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+        Don't have an account? <a href="{% url 'auctions:register' %}">Register here.</a>
     </main>
     
 

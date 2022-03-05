@@ -9,7 +9,11 @@
     <h1>Active Listings</h1>
     <ul>
         {% for listing in listings %}
-            <li><a href="#">Listing {{ listing.id}}: {{ listing.title}} </a></li>
+            <li class="active-listings">
+                <a href="{% url 'auctions:listing' listing.id %}">Listing {{ listing.id}}: {{ listing.title}} </a>
+                <img src="static/{{ listing.image }}"/>
+                <p><b>Current Bid: </b> $999.99</p>
+            </li>
         {% endfor %}
     </ul>
 </main>
