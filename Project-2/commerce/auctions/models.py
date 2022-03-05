@@ -40,7 +40,11 @@ class Bid(models.Model):
     # def __str__(self):
     #     return f'{self.id}: {self.bid_amount} by {user.username} for {listing.title}'    
     
-
+class Comment(models.Model):
+    date_placed = models.DateField(auto_now_add=True)
+    comment_post = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comment_users")
+    listings = models.ManyToManyField(Listing, blank=True, related_name="comments")
 
 
 
