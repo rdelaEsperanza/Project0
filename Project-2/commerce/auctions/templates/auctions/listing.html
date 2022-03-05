@@ -30,12 +30,13 @@
                 <input type="number" step="any" />
             </label>
             <div class="pseudo-label">
-                <h2>Watchlists</h2>
-                <select name="watchlist" id="">
-                    {% for watchlist in non_watchists %}
-                        <option value="{{ user.id }}"> {{ user }}</option>
-                    {% endfor %}
-                </select>
+                <h2>Watchlist Status</h2>
+                <label>
+                    <input type="radio" name="watchlist-status" value="Add to Watchlist" /> Add to Watchlist
+                </label>
+                <label>
+                    <input type="radio" name="watchlist-status" value="Remove from Watchlist" /> Remove from Watchlist
+                </label>
             </div>
             <div class="comments">
                 <h2>Comments</h2>

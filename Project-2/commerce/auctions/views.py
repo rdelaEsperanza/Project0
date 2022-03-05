@@ -134,11 +134,13 @@ def categories(request):
         "categories": Category.objects.all()
     })
 
-#Individual Category Page View
+# Individual Category Page View
 def category(request, category_id):
     category = Category.objects.get(id = category_id)
+    listings = Listing.objects.filter(listing.category == category)
     return render(request, "auctions/category.html", {
-        "category": category
+        "category": category,
+        "listings": listings
     })
 
 

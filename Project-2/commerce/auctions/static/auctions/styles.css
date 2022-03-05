@@ -237,7 +237,14 @@ main.listing form.bid-watchlist-comment label input[type="number"] {
 
 main.listing form.bid-watchlist-comment label b {
   display: block;
-  padding-bottom: 0.5rem;
+}
+
+main.listing form.bid-watchlist-comment b {
+  padding: 0 1rem 0.5rem 0;
+}
+
+main.listing form.bid-watchlist-comment label.enter-bid b {
+  display: inline-block;
 }
 
 main.listing form.bid-watchlist-comment .pseudo-label select {

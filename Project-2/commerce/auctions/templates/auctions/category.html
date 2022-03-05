@@ -7,14 +7,14 @@
 {% block body %}
 <main class="listing">
     <h1>Category: {{ category.title }}</h1>
-    <!-- <ul>
+    <ul>
         {% for listing in listings %}
             <li class="active-listings">
                 <a href="{% url 'auctions:listing' listing.id %}">Listing {{ listing.id}}: {{ listing.title}} </a>
                 <img src="static/{{ listing.image }}"/>
-                <p><b>Current Bid: </b> $999.99</p>
+                <p><b>Current Bid: </b> {{ listing.current_bid }}</p>
             </li>
         {% endfor %}
-    </ul> -->
+    </ul>
 </main>
 {% endblock %}
