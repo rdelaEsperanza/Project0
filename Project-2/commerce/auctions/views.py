@@ -125,8 +125,11 @@ def bidForm(request, listing_id):
         current_bid = listing.current_bid
         if bid_amount > current_bid:
           current_bid = bid_amount
-          listing.listing_bids.add()
-          return HTTPResponseRedirect(reverse("listing", args=(listing.id,)))
+          listing.save()
+        #   return HTTPResponseRedirect(reverse("listing", args=(listing.id,)))
+        return render(request, "auctions/listing.html", {
+            "listing": listing
+        })
 
 #Comments Form on Listing Page
 def commentForm(request, listing_id):
@@ -146,15 +149,18 @@ def commentForm(request, listing_id):
 #Close Listing View
 def close_listing(request, listing_id):
     if request.method=="POST":
-        listing = listing.objects.get(pk=listing_id)
+        listing = Listing.objects.get(pk=listing_id)
         bids = listing.listing_bids.all()
         listing.active = False
-        if listing.current_bid >= listing.starting_bid:
-            bid = Bid.objects.filter(bid_amount = current_bid)
-            bid.winning_bid = True
-            bid.listing_bid.save()
+        # if listing.current_bid >= listing.starting_bid:
+        bid = Bid.objects.filter(bid_amount = listing.current_bid)
+        bid.winning_bid = True
+        # bid.listing_bid.save()
         listing.save()
-        return HTTPResponseRedirect(reverse("listing", args=(listing.id,)))
+        return render(request, "auctions/listing.html", {
+            "listing": listing
+        })
+        # return HTTPResponseRedirect(reverse("listing", args=(listing.id,)))
 
 
 #Watchlist Page View   

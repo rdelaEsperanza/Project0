@@ -33,6 +33,12 @@ form {
   text-align: left;
 }
 
+.call-to-actions form {
+  margin: 0;
+  display: inline-block;
+  width: auto;
+}
+
 input[type="text"],
 input[type="password"],
 input[type="email"],

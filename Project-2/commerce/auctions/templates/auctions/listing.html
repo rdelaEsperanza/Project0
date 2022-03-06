@@ -20,16 +20,27 @@
     <div class="call-to-actions">
         <!--add option to close if user is owner-->
         {% if listing.user and listing.active %}
-            <button type="submit" name="close_listing">Close listing</button>
+        <form action="closed_listing/{{listing.id}}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Close listing</button>
+        </form>  
         {% endif %}
 
         <!--add remove watchlist code-->
-        {% if listing in user.objects.watchlists.all %}
-            <button type="submit" name="remove-from-watchlist">Remove from watchlist</button>
+        <form action="" method="POST">
+            {% if listing in user.objects.watchlists.all %}
+                <button type="submit">Remove from watchlist</button>
+            <!--else if active allow user to add to watchlist-->
+            {% elif listing.active %}
+                <button type="submit">Add to watchlist</button>
+            {% endif %}
+        </form>
+        <!-- {% if listing in user.objects.watchlists.all %}
+            <button type="submit" name="remove-from-watchlist">Remove from watchlist</button> -->
         <!--else if active allow user to add to watchlist-->
-        {% elif listing.active %}
+        <!-- {% elif listing.active %}
             <button type="submit" name="add-to-watchlist">Add to watchlist</button>
-        {% endif %}
+        {% endif %} -->
     </div>
      <!-- if active listing render forms -->
     {% if listing.active %}
