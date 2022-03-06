@@ -143,6 +143,20 @@ def commentForm(request, listing_id):
         # user = User.objects.get(pk="user_id")
         return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
 
+#Close Listing View
+def close_listing(request, listing_id):
+    if request.method=="POST":
+        listing = listing.objects.get(pk=listing_id)
+        bids = listing.listing_bids.all()
+        listing.active = False
+        if listing.current_bid >= listing.starting_bid:
+            bid = Bid.objects.filter(bid_amount = current_bid)
+            bid.winning_bid = True
+            bid.listing_bid.save()
+        listing.save()
+        return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+
+
 #Watchlist Page View   
 def watchlist(request, user_id):
     user = User.objects.get(id = user_id)

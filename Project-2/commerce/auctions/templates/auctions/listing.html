@@ -23,7 +23,7 @@
     <div class="call-to-actions">
         <!--add option to close if user is owner-->
         {% if listing.user %}
-            <button type="submit" name="close-listing">Close listing</button>
+            <button type="submit" name="close_listing">Close listing</button>
         {% endif %}
 
         <!--add remove watchlist code-->
@@ -36,20 +36,21 @@
         {% endif %}
     </div>
      
-
-    <form class="bid-watchlist-comment" action="{% url 'auctions:bidForm' listing.id %}" method="POST">
-        {% csrf_token %}
-        <div class="detail">
-            <h2>Bids</h2>
-            <p><b>Starting Bid: </b>{{ listing.starting_bid}}</p>
-            <p><b>Current Bid: </b>{{ listing.current_bid}}</p>
-            <label class="enter-bid">
-                <b>Enter a bid: </b>
-                <input type="number" step="any" name="bid_amount">
-            </label>
-            <input type="submit" value="Submit Bid" />
-        </div> 
-    </form> 
+    {% if listing.active %}
+        <form class="bid-watchlist-comment" action="{% url 'auctions:bidForm' listing.id %}" method="POST">
+            {% csrf_token %}
+            <div class="detail">
+                <h2>Bids</h2>
+                <p><b>Starting Bid: </b>{{ listing.starting_bid}}</p>
+                <p><b>Current Bid: </b>{{ listing.current_bid}}</p>
+                <label class="enter-bid">
+                    <b>Enter a bid: </b>
+                    <input type="number" step="any" name="bid_amount">
+                </label>
+                <input type="submit" value="Submit Bid" />
+            </div> 
+        </form> 
+    {% endif %}
     <form class="bid-watchlist-comment" action="{% url 'auctions:commentForm' listing.id %}" method="POST">
         {% csrf_token %}
         <div class="detail">
