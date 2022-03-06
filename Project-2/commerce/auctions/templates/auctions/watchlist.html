@@ -9,7 +9,7 @@
     <h1>My Watchlists</h1>
     <ul>
         {% for listing in watchlists %}
-            <li class="active-listings">
+            <li class="closed-listings">
                 <a href="{% url 'auctions:listing' listing.id %}">Listing #{{ listing.id}}: {{ listing.title }}</a>
             </li>
         {% empty %}

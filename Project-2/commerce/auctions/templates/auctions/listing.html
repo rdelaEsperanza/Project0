@@ -26,7 +26,6 @@
         <!--add remove watchlist code-->
         {% if listing in user.objects.watchlists.all %}
             <button type="submit" name="remove-from-watchlist">Remove from watchlist</button>
-        
         <!--else if active allow user to add to watchlist-->
         {% elif listing.active %}
             <button type="submit" name="add-to-watchlist">Add to watchlist</button>

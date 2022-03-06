@@ -169,6 +169,22 @@ def watchlist(request, user_id):
         "listings": listings
     })
 
+#Add Watchlist 
+def watchlist_add(request, listing_id):
+    if request.method=="POST":
+        listing = listing.objects.get(pk=listing_id)
+        user = request.user 
+        user.watchlists.add()
+        return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+
+#Remove Watchlist 
+def watchlist_remove(request, listing_id):
+    if request.method=="POST":
+        listing = listing.objects.get(pk=listing_id)
+        user = request.user
+        user.watchlists.delete()
+        return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+
 #Categories Page View 
 def categories(request):
     return render(request, "auctions/categories.html", {
