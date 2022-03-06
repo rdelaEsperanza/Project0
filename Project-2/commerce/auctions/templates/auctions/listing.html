@@ -13,16 +13,13 @@
             <p><b>Description: </b>{{ listing.description}}</p>
             <p><b>Category: </b>{{ listing.category}}</p>
             <p><b>Listing Owner: </b>{{ user.username}}</p>
-            
-
-            
         </div>
         <img src="static/{{ listing.image }}" />
     </div>
    
     <div class="call-to-actions">
         <!--add option to close if user is owner-->
-        {% if listing.user %}
+        {% if listing.user and listing.active %}
             <button type="submit" name="close_listing">Close listing</button>
         {% endif %}
 
@@ -30,12 +27,12 @@
         {% if listing in user.objects.watchlists.all %}
             <button type="submit" name="remove-from-watchlist">Remove from watchlist</button>
         
-        <!--else allow user to add to watchlist-->
-        {% else %}
+        <!--else if active allow user to add to watchlist-->
+        {% elif listing.active %}
             <button type="submit" name="add-to-watchlist">Add to watchlist</button>
         {% endif %}
     </div>
-     
+     <!-- if active listing render forms -->
     {% if listing.active %}
         <form class="bid-watchlist-comment" action="{% url 'auctions:bidForm' listing.id %}" method="POST">
             {% csrf_token %}
@@ -50,21 +47,21 @@
                 <input type="submit" value="Submit Bid" />
             </div> 
         </form> 
-    {% endif %}
-    <form class="bid-watchlist-comment" action="{% url 'auctions:commentForm' listing.id %}" method="POST">
-        {% csrf_token %}
-        <div class="detail">
-            <div class="comments">
-                <h2>Comments</h2>
-                <label>
-                    <b>New Comment:</b>
-                    <textarea name="comment_post"></textarea>
-                </label>
-                <input type="submit" value="Post Comment" />
-            </div>
-            <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
-        </div>
-    </form>
     
+        <form class="bid-watchlist-comment" action="{% url 'auctions:commentForm' listing.id %}" method="POST">
+            {% csrf_token %}
+            <div class="detail">
+                <div class="comments">
+                    <h2>Comments</h2>
+                    <label>
+                        <b>New Comment:</b>
+                        <textarea name="comment_post"></textarea>
+                    </label>
+                    <input type="submit" value="Post Comment" />
+                </div>
+                <div><span>(username)</span><p>Previous comment blah blah blah</p></div>
+            </div>
+        </form>
+    {% endif %}
 </main>
 {% endblock %}
