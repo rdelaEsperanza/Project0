@@ -33,8 +33,8 @@ class Bid(models.Model):
     date_placed = models.DateField(auto_now_add=True)
     bid_amount = models.DecimalField(max_digits=5, decimal_places=2)
     winning_bid = models.BooleanField(default=False)
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="listings")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users")
+    listing_bid = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="listing_bids")
+    user_bid = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_bids")
     # listings = models.ManyToManyField(Listing, blank=True, related_name="bids")
 
     # def __str__(self):
