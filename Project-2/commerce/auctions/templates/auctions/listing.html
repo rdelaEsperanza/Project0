@@ -19,21 +19,23 @@
         </div>
         <img src="static/{{ listing.image }}" />
     </div>
-    <!-- if user is owner then show close button -->
+   
+    <div class="call-to-actions">
+        <!--add option to close if user is owner-->
+        {% if listing.user %}
+            <button type="submit" name="close-listing">Close listing</button>
+        {% endif %}
 
-   <!-- if listing in user.objects.watchlists.all()  
-    add remove watchlist code
-    else show add watchlist
-    <div class="pseudo-label">
-                <h2>Watchlist Status</h2>
-                <label>
-                    <input type="radio" name="watchlist-status" value="Add to Watchlist" /> Add to Watchlist
-                </label>
-                <label>
-                    <input type="radio" name="watchlist-status" value="Remove from Watchlist" /> Remove from Watchlist
-                </label>
-            </div>
--->
+        <!--add remove watchlist code-->
+        {% if listing in user.objects.watchlists.all %}
+            <button type="submit" name="remove-from-watchlist">Remove from watchlist</button>
+        
+        <!--else allow user to add to watchlist-->
+        {% else %}
+            <button type="submit" name="add-to-watchlist">Add to watchlist</button>
+        {% endif %}
+    </div>
+     
 
     <form class="bid-watchlist-comment" action="{% url 'auctions:bidForm' listing.id %}" method="POST">
         {% csrf_token %}
