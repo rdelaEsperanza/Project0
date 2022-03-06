@@ -117,8 +117,9 @@ def listing(request, listing_id):
 def bidForm(request, listing_id):
     if request.method=="POST":
         listing = Listing.objects.get(pk=listing_id)
-        bids = listing.bids.all()
         user = request.user
+        bids = listing.bids.all()
+        
         bid_amount = int(request.POST["bid_amount"])
         current_bid = int(request.POST["bid_amount"])
         bid.listings.add(listing)
