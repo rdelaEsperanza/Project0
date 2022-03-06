@@ -126,7 +126,7 @@ def bidForm(request, listing_id):
         if bid_amount > current_bid:
           current_bid = bid_amount
           listing.listing_bids.add()
-          return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+          return HTTPResponseRedirect(reverse("listing", args=(listing.id,)))
 
 #Comments Form on Listing Page
 def commentForm(request, listing_id):
@@ -141,7 +141,7 @@ def commentForm(request, listing_id):
 
         # user_id = int(request.POST["user"])
         # user = User.objects.get(pk="user_id")
-        return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+        return HTTPResponseRedirect(reverse("listing", args=(listing.id,)))
 
 #Close Listing View
 def close_listing(request, listing_id):
@@ -154,7 +154,7 @@ def close_listing(request, listing_id):
             bid.winning_bid = True
             bid.listing_bid.save()
         listing.save()
-        return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+        return HTTPResponseRedirect(reverse("listing", args=(listing.id,)))
 
 
 #Watchlist Page View   
@@ -175,7 +175,7 @@ def watchlist_add(request, listing_id):
         listing = listing.objects.get(pk=listing_id)
         user = request.user 
         user.watchlists.add()
-        return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+        return HTTPResponseRedirect(reverse("listing", args=(listing.id,)))
 
 #Remove Watchlist 
 def watchlist_remove(request, listing_id):
@@ -183,7 +183,7 @@ def watchlist_remove(request, listing_id):
         listing = listing.objects.get(pk=listing_id)
         user = request.user
         user.watchlists.delete()
-        return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+        return HTTPResponseRedirect(reverse("listing", args=(listing.id,)))
 
 #Categories Page View 
 def categories(request):
