@@ -126,10 +126,10 @@ def bidForm(request, listing_id):
         if bid_amount > current_bid:
           current_bid = bid_amount
           listing.save()
-        #   return HTTPResponseRedirect(reverse("listing", args=(listing.id,)))
-        return render(request, "auctions/listing.html", {
-            "listing": listing
-        })
+          return HTTPResponseRedirect(reverse("listing", kwargs=('listing_id':listing.id)))
+        # return render(request, "auctions/listing.html", {
+        #     "listing": listing
+        # })
 
 #Comments Form on Listing Page
 def commentForm(request, listing_id):
