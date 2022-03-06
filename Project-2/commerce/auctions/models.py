@@ -33,9 +33,9 @@ class Bid(models.Model):
     date_placed = models.DateField(auto_now_add=True)
     bid_amount = models.DecimalField(max_digits=5, decimal_places=2)
     winning_bid = models.BooleanField(default=False)
-    # listing = models.ForeignKey("Listing", on_delete=models.CASCADE, related_name="listings")
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="listings")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="users")
-    listings = models.ManyToManyField(Listing, blank=True, related_name="bids")
+    # listings = models.ManyToManyField(Listing, blank=True, related_name="bids")
 
     # def __str__(self):
     #     return f'{self.id}: {self.bid_amount} by {user.username} for {listing.title}'    
@@ -43,8 +43,10 @@ class Bid(models.Model):
 class Comment(models.Model):
     date_placed = models.DateField(auto_now_add=True)
     comment_post = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comment_users")
-    listings = models.ManyToManyField(Listing, blank=True, related_name="comments")
+    user_comment = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user_comments")
+    listing_comment = models.ForeignKey(Listing, on_delete=models.CASCADE, blank=True, null=True, related_name="listing_comments")
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comment_users")
+    # listings = models.ManyToManyField(Listing, blank=True, related_name="comments")
 
 
 
