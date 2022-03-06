@@ -132,6 +132,13 @@ def bidForm(request, listing_id):
 def commentForm(request, listing_id):
     if request.method=="POST":
         listing = Listing.objects.get(pk=listing_id)
+        user = request.user
+        comments = listing.listing_comments.all()
+        user_comment = user
+        listing_comment = listing
+        comment_post = request.POST["comment_post"]
+        listing.listing_comments.add()
+
         # user_id = int(request.POST["user"])
         # user = User.objects.get(pk="user_id")
         return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
