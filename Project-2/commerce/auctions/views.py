@@ -99,7 +99,7 @@ def create(request):
 #Individual Listing Page View
 def listing(request, listing_id):
     listing = Listing.objects.get(id = listing_id)
-    bids = listing.bids.all()
+    bids = listing.listing_bids.all()
     watchlists = listing.watchlists.all()
     # user = request.user
     # print(user)
@@ -118,12 +118,15 @@ def bidForm(request, listing_id):
     if request.method=="POST":
         listing = Listing.objects.get(pk=listing_id)
         user = request.user
-        bids = listing.bids.all()
-        
+        bids = listing.listing_bids.all()
+        user_bid = user
+        listing_bid = listing
         bid_amount = int(request.POST["bid_amount"])
-        current_bid = int(request.POST["bid_amount"])
-        bid.listings.add(listing)
-        return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
+        current_bid = listing.current_bid
+        if bid_amount > current_bid:
+          current_bid = bid_amount
+          listing.listing_bids.add()
+          return HTTPResponseRedirect(reversal("listing", args=(listing.id,)))
 
 #Comments Form on Listing Page
 def commentForm(request, listing_id):
