@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Mail{% endblock %}</title>
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+        <script src="https://kit.fontawesome.com/ffa8d57923.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;600;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'mail/styles.css' %}">
+        {% block script %}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <div><b>Project 3 - Mail</b></div>
+        </header>
+        <div class="main-content-wrapper">
+            {% block body %}
+            {% endblock %}
+        </div>
+
+        <footer>
+            <span>Harvard Extension School</span>
+            <span>CSCI E-33a &mdash; Spring 2022</span>
+            <span>Reina McCuskey</span>
+        </footer>
+    </body>
+</html>
