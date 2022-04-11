@@ -1,0 +1,342 @@
+html {
+    font-size: 62.5%;
+  }
+  
+  body {
+    margin: 0;
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.6rem;
+  }
+  
+  body * {
+    box-sizing: border-box;
+  }
+  
+  a,
+  a:visited,
+  button {
+    color: #b2e4f9;
+    text-decoration: none;
+    line-height: 1;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  
+  p.success-message {
+    color: #0c6202;
+    font-weight: 600;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form label {
+    display: block;
+    width: 100%;
+  }
+  
+  form label b {
+    display: block;
+    text-align: top;
+    padding-top: 0.5rem;
+    letter-spacing: 0.025rem;
+    font-weight: 600;
+  }
+  
+  form label input,
+  form label textarea {
+    font-size: 1.6rem;
+    width: 100%;
+    padding: 0.5rem;
+    border: thin solid #325794;
+  }
+
+  form label textarea {
+    min-height: 20rem;
+  }
+  
+  form input[disabled] {
+    border: thin solid #dddddd;
+  }
+  
+  .call-to-actions form {
+    margin: 0;
+    display: inline-block;
+    width: auto;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"],
+  select {
+    font-size: 1.8rem;
+    padding: 0.5rem;
+    width: 100%;
+  }
+  
+  input[type="submit"],
+  button[type="submit"],
+  a.secondary {
+    background-color: #105fbd;
+    border: none;
+    color: white;
+    margin: 5rem 0 3rem;
+    padding: 1rem 3rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    align-self: center;
+  }
+  
+  button[type="submit"] {
+    margin: 2rem 1rem 0;
+    display: inline-block;
+  }
+  
+  a.tertiary,
+  button.tertiary {
+    background-color: white;
+    border: thin solid #325794;
+    color: #b2e4f9;
+    margin: 0.5rem;
+    padding: 1rem 3rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  button.tertiary:first-of-type {
+    margin-left: 0;
+  }
+  
+  a.secondary.logout {
+    margin: 0.5rem 0.5rem 0.5rem auto;
+  }
+  
+  a.secondary:hover,
+  a.tertiary:hover,
+  button.tertiary:hover {
+    background-color: #4d6ca1;
+    color: white;
+  }
+  
+  .pseudo-label label,
+  .pseudo-label select {
+    display: inline-block;
+    margin: 0 2rem 5rem 0;
+    font-weight: 400;
+  }
+  
+  .flex-wrapper {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+
+  .visuallyhidden {
+    clip: rect(0 0 0 0); 
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap; 
+    width: 1px;
+  }
+  
+  header {
+    padding: 2rem;
+    color: #f2e3fc;
+    background-color: #312450;
+    text-align: center;
+    margin-bottom: 0;
+    border-image: linear-gradient(to right, #56a0d4, #c751b4, #feb3bf, #2cc9c2, #fdad58) 1;
+    border-width: 0;
+    border-bottom-width: 0.5rem;
+    border-style: solid;
+  }
+  
+  header div b {
+    font-size: 4rem;
+    font-weight: 400;
+  }
+
+  header nav {
+    padding: 2rem 0 0;
+    display: flex;
+  }
+
+  header nav a {
+    margin: 0 1rem;
+  }
+
+  header nav a span {
+    font-size: 1.3rem;
+  }
+
+  header nav a:first-of-type {
+    margin: 0 auto 0 0;
+  }
+
+  header nav a:last-of-type {
+    margin: 0 0 0 auto;
+  }
+
+  header nav a, header nav a:visited, header nav button {
+    color: #b2e4f9;
+    text-transform: capitalize;
+  }
+
+  header nav a:hover {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  
+  h1 {
+    color: #f55f07;
+    margin-top: 0;
+    font-size: 4rem;
+    font-weight: 600;
+    line-height: 1.8;
+    text-shadow: rgb(0 0 0 / 5%) 1px 0 5px;
+    text-transform: capitalize;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
+    padding-bottom: 2rem;
+  }
+  
+  .main-content-wrapper {
+    position: relative;
+    min-height: calc(100vh - 19rem);
+    background-image: url('rodion-kutsaev-0VGG7cqTwCo-unsplash.jpg');
+    background-size: cover;
+    background-position: top 25% center;
+    background-repeat: no-repeat;
+    background-color: #5e42a6;
+    color: #0a060d;
+  }
+  
+  main {
+    padding: 2rem 2rem 4rem;
+    position: relative;
+  }
+
+  .login, .register {
+    padding: 2rem 5rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: thin solid white;
+    text-align: center;
+    width: 50rem;
+    margin: 5rem auto;
+  }
+
+  .login form, .register form {
+    width: 40rem;
+    margin: 0 auto;
+  }
+
+  .login form label:not(:last-of-type), .register form label:not(:last-of-type) {
+    padding-bottom: 2rem;
+  }
+
+  form.login-form input[type="submit"], form.register-form input[type="submit"] {
+    margin-top: 1rem;
+    width: auto;
+  }
+
+  section.login p a, section.login p a:visited, section.login p button, section.register p a, section.register p a:visited, section.register p button {
+    color: #105fbd;
+    font-size: 1.6rem;
+  }
+
+  .post-comment {
+    width: 40%;
+    padding: 2rem 5rem;
+    margin: 0 10rem 0 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: thin solid white;
+  }
+
+  .feed {
+    flex-grow: 2;
+    padding: 2rem 5rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: thin solid white;
+  }
+
+  .feed .post {
+    padding: 2rem;
+    background-color: white;
+    margin-bottom: 2rem;
+    border: 0.5rem double #ddd;
+    position: relative;
+  }
+
+  .feed .post a.edit-post {
+    position: absolute;
+    font-size: 1.4rem;
+    color: #105fbd;
+    right: 1rem;
+    top: 1rem;
+  }
+
+  .feed .post b {
+    margin-right: 1rem;
+  }
+
+  form.edit-form {
+    display:none;
+    margin-top: 2rem;
+  }
+
+  form.edit-form input[type="submit"] {
+    margin: 2rem 0 0;
+  }
+
+  .credit {
+    position: absolute;
+    top: -4rem;
+    left: 2rem;
+    margin: 0;
+    color: #d6ceec;
+  }
+
+  .credit, .credit a {
+    font-size: 1.4rem;
+  }
+
+  footer {
+    position: relative;
+    padding: 2rem;
+    background-color: #180C3A;
+    color: #d6ceec;
+    display: flex;
+    justify-content: space-between;
+    border-image: linear-gradient(to right, #fdad58, #2cc9c2, #c751b4, #feb3bf, #56a0d4) 1;
+    border-width: 0;
+    border-top-width: 0.5rem;
+    border-style: solid;
+  }
+
+
+  @media (max-width: 1080px) {
+    .flex-wrapper.home {
+      flex-direction: column;
+    }
+    .post-comment, .feed {
+      width: 100%;
+      margin: 0 0 3rem 0;
+    }
+  }
