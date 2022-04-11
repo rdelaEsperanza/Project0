@@ -19,9 +19,11 @@
                 <h2>All Posts</h2>
                 {% for post in posts reversed %}
                     <div class="post">
+                        {% if user.id == post.user.id %}
                         <a href="#" class="edit-post"><i class="fa fa-edit"></i> Edit</a>
+                        {% endif %}
                         <div class="flex-wrapper">
-                            <b>@{{ post.user }}</b>
+                            <a class="post-creator" href="#">@{{ post.user }}</a>
                             <span>{{ post.timestamp }}</span>
                         </div>
                         <p id="posted" class="posted">{{ post.body }}</p>
@@ -33,6 +35,10 @@
                             </label>
                             <input type="submit" aria-label="submit comment" Value="Submit"/>
                         </form>
+                        {% if user.is_authenticated %}
+                        <a class="like-post" href="/like?post_id={{ post.id }}"><i class="fa fa-thumbs-up"></i> Like</a>
+                        {% endif %}
+                        <span class="no-likes">(# of likes: {{ post.no_likes }})</span>
                     </div>
                 {% empty %}
                     <div>

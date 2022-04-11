@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if the user clicked on a hide button
         if (element.className === 'edit-post') {
             element.style.display = 'none'
-            element.parentElement.querySelector('p.posted').style.display = 'none';
+            element.parentElement.querySelector('.posted').style.display = 'none';
+            element.parentElement.querySelector('.like-post').style.display = 'none';
             element.parentElement.querySelector('.edit-form').style.display = 'block';
         }
     });

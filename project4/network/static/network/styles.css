@@ -19,7 +19,7 @@ html {
     color: #b2e4f9;
     text-decoration: none;
     line-height: 1;
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 400;
   }
   
@@ -89,6 +89,12 @@ html {
     border-radius: 0.25rem;
     cursor: pointer;
     align-self: center;
+  }
+
+  input[type="submit"]:hover,
+  button[type="submit"]:hover,
+  a.secondary:hover {
+    background-color:#312450;
   }
   
   button[type="submit"] {
@@ -293,10 +299,6 @@ html {
     top: 1rem;
   }
 
-  .feed .post b {
-    margin-right: 1rem;
-  }
-
   form.edit-form {
     display:none;
     margin-top: 2rem;
@@ -304,6 +306,30 @@ html {
 
   form.edit-form input[type="submit"] {
     margin: 2rem 0 0;
+  }
+
+  .feed .post a.like-post {
+    font-size: 1.4rem;
+    color: #105fbd;
+    margin-right: 1rem;
+  }
+
+  .feed .post .no-likes {
+    color: #999999;
+  }
+
+  .feed .post a.post-creator {
+    color: #105fbd;
+    margin-right: 1rem;
+  }
+
+  .feed .post a.post-creator:hover {
+    color: #325794;
+  }
+
+  .feed .post a.like-post:hover, .feed .post a.edit-post:hover {
+    color: #325794;
+    font-size: 1.6rem;
   }
 
   .credit {

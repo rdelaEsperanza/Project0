@@ -50,7 +50,35 @@ def comment(request):
     else:
         return redirect('/')
 
+def profile(request):
+    pass
+    return render(request, "network/profile.html")
 
+@login_required(login_url='login')
+def following(request):
+    pass
+    return render(request, "network/following.html")
+
+@login_required(login_url='login')
+def like(request):
+    user = request.user
+    post_id = request.GET.get('post_id')
+    post = Post.objects.get(id=post_id)
+
+    like_check = Like.objects.filter(post_id = post_id, fan = user).first()
+
+    if like_check == None:
+        new_like = Like.objects.create(post_id = post_id, fan = user)
+        new_like.save()
+        post.no_likes = post.no_likes+1
+        post.save()
+        return HttpResponseRedirect(reverse("index"))
+        
+    else:
+        like_check.delete()
+        post.no_likes = post.no_likes-1
+        post.save()
+        return HttpResponseRedirect(reverse("index"))
 
 def logout_view(request):
     logout(request)
