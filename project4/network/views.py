@@ -50,9 +50,19 @@ def comment(request):
     else:
         return redirect('/')
 
-def profile(request):
-    pass
-    return render(request, "network/profile.html")
+@login_required(login_url='login')
+def profile(request, user_id):
+    user = User.objects.get(id = user_id)
+    user_profile = Profile.objects.get(user = user)
+    user_posts = Post.objects.filter(user = user)
+    user_no_posts = len(user_posts)
+
+    return render(request, "network/profile.html", {
+        "user": user,
+        "user_profile": user_profile,
+        "user_posts": user_posts,
+        "user_no_posts": user_no_posts,
+    })
 
 @login_required(login_url='login')
 def following(request):
@@ -60,15 +70,15 @@ def following(request):
     return render(request, "network/following.html")
 
 @login_required(login_url='login')
-def like(request):
+def like(request, post_id):
     user = request.user
-    post_id = request.GET.get('post_id')
+    # post_id = request.GET.get('post_id')
     post = Post.objects.get(id=post_id)
 
-    like_check = Like.objects.filter(post_id = post_id, fan = user).first()
+    like_check = Like.objects.filter(post_id = post.id, fan = user).first()
 
     if like_check == None:
-        new_like = Like.objects.create(post_id = post_id, fan = user)
+        new_like = Like.objects.create(post_id = post.id, fan = user)
         new_like.save()
         post.no_likes = post.no_likes+1
         post.save()

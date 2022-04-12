@@ -17,7 +17,7 @@
             <nav class="">
                     <a class="" href="{% url 'index' %}">Home</a>
                     {% if user.is_authenticated %}
-                        <a href="{% url 'profile' %}"><i class="fa fa-user"></i> My Profile <span>( {{ user.username }} )</span></a>
+                        <a href="{% url 'profile' user.id %}"><i class="fa fa-user"></i> My Profile <span>( {{ user.username }} )</span></a>
                         <a href="#">Following</a>
                         <a href="{% url 'logout' %}">Log Out</a>
                     {% else %}

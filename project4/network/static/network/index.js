@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Find what was clicked on
         const element = event.target;
     
-        // Check if the user clicked on a hide button
+        // Check if the user clicked on the edit button and do your magic
         if (element.className === 'edit-post') {
             element.style.display = 'none'
             element.parentElement.querySelector('.posted').style.display = 'none';

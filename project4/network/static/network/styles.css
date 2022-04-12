@@ -267,6 +267,21 @@ html {
     font-size: 1.6rem;
   }
 
+  .basic-info {
+    display:flex;
+    justify-content: space-between;
+    padding: 2rem;
+    margin-top: -2rem;
+    background-color: rgba(255, 255, 255, 0.8);
+
+  }
+
+  .bio-avatar {
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: thin solid white;
+  }
+
   .post-comment {
     width: 40%;
     padding: 2rem 5rem;
