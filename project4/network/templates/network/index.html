@@ -23,7 +23,7 @@
                         <a href="#" class="edit-post"><i class="fa fa-edit"></i> Edit</a>
                         {% endif %}
                         <div class="flex-wrapper">
-                            <a class="post-creator" href="#">@{{ post.user }}</a>
+                            <a class="post-creator" href="{% url 'profile' post.user.id %}">@{{ post.user }}</a>
                             <span>{{ post.timestamp }}</span>
                         </div>
                         <p id="posted" class="posted">{{ post.body }}</p>

@@ -1,14 +1,26 @@
 {% extends "network/layout.html" %}
 {% block title %}
-    {{ user_profile.user.username }}
+    Profile: {{ followee.username }}
 {% endblock %}
 {% block body %}
 <main>
-    <h1>Profile: {{ user_profile.user.username }}</h1>
+    <h1 class="profile">
+        Profile: {{ followee.username }}
+        {% if follower.username != followee.username %}
+            <form class="unflex" action="follow" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{user.username}}" name="follower" />
+                <input type="hidden" value="{{followee.username}}" name="user" />
+
+                <input class="follow-submit" type="submit" aria-label="follow-button" Value="{{ cta_text }}"/>
+            </form>
+        {% endif %}
+    </h1>
+    
     <div class="basic-info">
         <span><b>Number of posts:</b> {{ user_no_posts}}</span>
-        <span><b>Number of followers:</b> </span>
-        <span><b>Number following:</b> </span>
+        <span><b>Number of followers:</b> {{ profile_followers }}</span>
+        <span><b>Number following:</b> {{ profiles_following }}</span>
     </div>
     <section class="bio-avatar flex-wrapper">
         <div class="bio">
@@ -21,7 +33,7 @@
         <h2>{{ user_profile.user.username }}'s Posts</h2>
         {% for post in user_posts reversed %}
             <div class="post">
-                {% if user == user_profile.user %}
+                {% if user == followee %}
                 <a href="#" class="edit-post"><i class="fa fa-edit"></i> Edit</a>
                 {% endif %}
                 <div class="flex-wrapper">

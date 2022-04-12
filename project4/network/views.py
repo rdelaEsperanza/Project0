@@ -6,7 +6,6 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from .models import User, Profile, Post, Like, Follower
-from itertools import chain
 
 
 @login_required(login_url='login')
@@ -52,17 +51,50 @@ def comment(request):
 
 @login_required(login_url='login')
 def profile(request, user_id):
-    user = User.objects.get(id = user_id)
-    user_profile = Profile.objects.get(user = user)
-    user_posts = Post.objects.filter(user = user)
+    target_user = User.objects.get(id = user_id)
+    user_profile = Profile.objects.get(user = target_user)
+    user_posts = Post.objects.filter(user = target_user)
     user_no_posts = len(user_posts)
 
+    follower = request.user
+    followee = target_user
+
+    if Follower.objects.filter(follower = follower, user = followee).first():
+        cta_text = "Unfollow"
+    else:
+        cta_text = "Follow"
+
+    profile_followers = len(Follower.objects.filter(user=user_id))
+    profiles_following = len(Follower.objects.filter(follower=user_id))
+
     return render(request, "network/profile.html", {
-        "user": user,
+        "followee": followee,
+        "follower": follower,
         "user_profile": user_profile,
         "user_posts": user_posts,
         "user_no_posts": user_no_posts,
+        "cta_text": cta_text,
+        "profile_followers": profile_followers,
+        "profiles_following": profiles_following
     })
+
+@login_required(login_url='login')
+def follow(request):
+    if request.method == "POST":
+        follower = request.POST["follower"]
+        user = request.POST["user"]
+
+        if Follower.objects.filter(follower = follower, user = user).first():
+            delete_follower = Follower.objects.get(follower = follower, user = user)
+            delete_follower.delete()
+            return HttpResponseRedirect(reverse("index"))
+        else:
+            new_follower = Follower.objects.create(follower = follower, user = user)
+            new_follower.save()
+            return HttpResponseRedirect(reverse("index"))
+
+    else:
+     return HttpResponseRedirect(reverse("index"))
 
 @login_required(login_url='login')
 def following(request):

@@ -28,10 +28,11 @@ html {
     font-weight: 600;
   }
   
-  form {
+  form:not(.unflex) {
     display: flex;
     flex-direction: column;
   }
+
   
   form label {
     display: block;
@@ -112,6 +113,7 @@ html {
     border-radius: 0.25rem;
     cursor: pointer;
   }
+
   
   button.tertiary:first-of-type {
     margin-left: 0;
@@ -127,6 +129,7 @@ html {
     background-color: #4d6ca1;
     color: white;
   }
+
   
   .pseudo-label label,
   .pseudo-label select {
@@ -214,6 +217,11 @@ html {
     line-height: 1.8;
     text-shadow: rgb(0 0 0 / 5%) 1px 0 5px;
     text-transform: capitalize;
+  }
+
+  h1.profile {
+    display: flex;
+    justify-content: space-between;
   }
   
   h2 {
@@ -357,6 +365,15 @@ html {
 
   .credit, .credit a {
     font-size: 1.4rem;
+  }
+
+
+  form.unflex {
+    width:fit-content;
+  }
+
+  form.unflex input.follow-submit[type="submit"] {
+    margin: 0;
   }
 
   footer {
