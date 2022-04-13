@@ -27,12 +27,13 @@
                             <span>{{ post.timestamp }}</span>
                         </div>
                         <p id="posted" class="posted">{{ post.body }}</p>
-                        <form class="edit-form" id="editForm">
+                        <form action="edit_comment" method="POST" class="edit-form" id="editForm">
                             {% csrf_token %}
                             <label>
                                 <b class="visuallyhidden">Comment</b>
                                 <textarea id="editBody" name="body">{{ post.body }}</textarea>
                             </label>
+                            <input type="hidden" value="{{ post.id }}" name="post-id" />
                             <input type="submit" aria-label="submit comment" Value="Submit"/>
                         </form>
                         {% if user.is_authenticated %}

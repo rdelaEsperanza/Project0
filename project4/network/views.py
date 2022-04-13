@@ -50,6 +50,19 @@ def comment(request):
         return redirect('/')
 
 @login_required(login_url='login')
+def edit_comment(request):
+    if request.method == "POST":
+        post_id = request.POST.get("post.id")
+        print(post_id)
+        # post = Post.objects.get(id = post_id)
+        # post.body = request.POST["body"]
+        # post.save()
+
+        return HttpResponseRedirect(reverse("index"))
+    else:
+        return redirect('/')
+
+@login_required(login_url='login')
 def profile(request, user_id):
     target_user = User.objects.get(id = user_id)
     user_profile = Profile.objects.get(user = target_user)
