@@ -54,9 +54,9 @@ def edit_comment(request):
     if request.method == "POST":
         post_id = request.POST.get("post.id")
         print(post_id)
-        # post = Post.objects.get(id = post_id)
-        # post.body = request.POST["body"]
-        # post.save()
+        post = Post.objects.get(id = post_id)
+        post.body = request.POST["body"]
+        post.save()
 
         return HttpResponseRedirect(reverse("index"))
     else:
@@ -123,7 +123,7 @@ def like(request, post_id):
     like_check = Like.objects.filter(post_id = post.id, fan = user).first()
 
     if like_check == None:
-        new_like = Like.objects.create(post_id = post.id, fan = user)
+        new_like = Like.objects.create(post_id = post, fan = user)
         new_like.save()
         post.no_likes = post.no_likes+1
         post.save()
