@@ -95,16 +95,16 @@ def profile(request, user_id):
 def follow(request):
     if request.method == "POST":
         follower = request.POST["follower"]
-        user = request.POST["user"]
+        followee = request.POST["followee"]
 
-        if Follower.objects.filter(follower = follower, user = user).first():
-            delete_follower = Follower.objects.get(follower = follower, user = user)
+        if Follower.objects.filter(follower = follower, user = followee).first():
+            delete_follower = Follower.objects.get(follower = follower, user = followee)
             delete_follower.delete()
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("profile/"+followee))
         else:
-            new_follower = Follower.objects.create(follower = follower, user = user)
+            new_follower = Follower.objects.create(follower = follower, user = followee)
             new_follower.save()
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("profile/"+followee))
 
     else:
      return HttpResponseRedirect(reverse("index"))
