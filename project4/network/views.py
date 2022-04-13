@@ -3,16 +3,28 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.core.paginator import Paginator
+# from django.views.generic import ListView
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from .models import User, Profile, Post, Like, Follower
 
+# class PostListView(ListView):
+#     paginate_by = 10
+#     model = Post
 
 @login_required(login_url='login')
 def index(request):
 
     posts = Post.objects.all()
+    # post_list = Post.objects.all()
+    # paginator = Paginator(post_list, 10)
+
+    # page_number = request.GET.get("page")
+    # page_obj = paginator.get_page(page_number)
+
     return render(request, "network/index.html", {'posts':posts})
+    # return render(request, "network/index.html", {"page_obj" : page_obj})
 
 
 
@@ -91,33 +103,57 @@ def profile(request, user_id):
         "profiles_following": profiles_following
     })
 
+# @login_required(login_url='login')
+# def follow(request):
+#     if request.method == "POST":
+#         follower = request.POST["follower"]
+#         followee = request.POST["followee"]
+
+#         if Follower.objects.filter(follower = follower, user = followee).first():
+#             delete_follower = Follower.objects.get(follower = follower, user = followee)
+#             delete_follower.delete()
+#             return HttpResponseRedirect(reverse("profile/"+followee))
+#         else:
+#             new_follower = Follower.objects.create(follower = follower, user = followee)
+#             new_follower.save()
+#             return HttpResponseRedirect(reverse("profile/"+followee))
+
+#     else:
+#      return redirect('/')
+
 @login_required(login_url='login')
-def follow(request):
-    if request.method == "POST":
-        follower = request.POST["follower"]
-        followee = request.POST["followee"]
+def follow(request, user_id):
+    follower = request.user
 
-        if Follower.objects.filter(follower = follower, user = followee).first():
-            delete_follower = Follower.objects.get(follower = follower, user = followee)
-            delete_follower.delete()
-            return HttpResponseRedirect(reverse("profile/"+followee))
-        else:
-            new_follower = Follower.objects.create(follower = follower, user = followee)
-            new_follower.save()
-            return HttpResponseRedirect(reverse("profile/"+followee))
+    follow_check = Follow.objects.get(follower = follower, user = user_id)
 
+    if follow_check == None:
+        new_follow = Follow.objects.create(follower = follower, user = user_id)
+        new_follow.save()
+        cta_text = "Unfollow"
+        
     else:
-     return HttpResponseRedirect(reverse("index"))
+        follow_check.delete()
+        cta_text = "Follow"
+
+    return render(request, "network/index", {
+        "cta_text": cta_text
+    })
 
 @login_required(login_url='login')
 def following(request):
-    pass
-    return render(request, "network/following.html")
+    stalking = Follower.objects.filter(follower = request.user)
+    followee = stalking.user
+    posts = Post.objects.filter(user = followee)
+    return render(request, "network/following.html", {
+        "stalking": stalker,
+        "followee": followee,
+        "posts": posts
+    })
 
 @login_required(login_url='login')
 def like(request, post_id):
     user = request.user
-    # post_id = request.GET.get('post_id')
     post = Post.objects.get(id=post_id)
 
     like_check = Like.objects.filter(post_id = post.id, fan = user).first()
