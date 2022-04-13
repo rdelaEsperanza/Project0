@@ -103,42 +103,42 @@ def profile(request, user_id):
         "profiles_following": profiles_following
     })
 
-# @login_required(login_url='login')
-# def follow(request):
-#     if request.method == "POST":
-#         follower = request.POST["follower"]
-#         followee = request.POST["followee"]
-
-#         if Follower.objects.filter(follower = follower, user = followee).first():
-#             delete_follower = Follower.objects.get(follower = follower, user = followee)
-#             delete_follower.delete()
-#             return HttpResponseRedirect(reverse("profile/"+followee))
-#         else:
-#             new_follower = Follower.objects.create(follower = follower, user = followee)
-#             new_follower.save()
-#             return HttpResponseRedirect(reverse("profile/"+followee))
-
-#     else:
-#      return redirect('/')
-
 @login_required(login_url='login')
-def follow(request, user_id):
-    follower = request.user
+def follow(request):
+    if request.method == "POST":
+        follower = request.POST["follower"]
+        followee = request.POST["followee"]
 
-    follow_check = Follow.objects.get(follower = follower, user = user_id)
+        if Follower.objects.filter(follower = follower, user = followee).first():
+            delete_follower = Follower.objects.get(follower = follower, user = followee)
+            delete_follower.delete()
+            return HttpResponseRedirect(reverse("profile/"+followee))
+        else:
+            new_follower = Follower.objects.create(follower = follower, user = followee)
+            new_follower.save()
+            return HttpResponseRedirect(reverse("profile/"+followee))
 
-    if follow_check == None:
-        new_follow = Follow.objects.create(follower = follower, user = user_id)
-        new_follow.save()
-        cta_text = "Unfollow"
-        
     else:
-        follow_check.delete()
-        cta_text = "Follow"
+     return redirect('/')
 
-    return render(request, "network/index", {
-        "cta_text": cta_text
-    })
+# @login_required(login_url='login')
+# def follow(request, user_id):
+#     follower = request.user
+
+#     follow_check = Follow.objects.get(follower = follower, user = user_id)
+
+#     if follow_check == None:
+#         new_follow = Follow.objects.create(follower = follower, user = user_id)
+#         new_follow.save()
+#         cta_text = "Unfollow"
+        
+#     else:
+#         follow_check.delete()
+#         cta_text = "Follow"
+
+#     return render(request, "network/index", {
+#         "cta_text": cta_text
+#     })
 
 @login_required(login_url='login')
 def following(request):

@@ -7,14 +7,14 @@
     <h1 class="profile">
         Profile: {{ followee.username }}
         {% if follower.username != followee.username %}
-            <!-- <form class="unflex" action="follow" method="POST">
+            <form class="unflex" action="follow" method="POST">
                 {% csrf_token %}
                 <input type="hidden" value="{{user.username}}" name="follower" />
                 <input type="hidden" value="{{followee.username}}" name="followee" />
 
                 <input class="follow-submit" type="submit" aria-label="follow-button" Value="{{ cta_text }}"/>
-            </form> -->
-            <a class="follow-user" href="{% url 'follow' followee.user.id %}">{{ cta_text }}</a>
+            </form>
+           
         {% endif %}
     </h1>
     
