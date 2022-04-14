@@ -9,8 +9,8 @@
         {% if follower.username != followee.username %}
             <form class="unflex" action="follow" method="POST">
                 {% csrf_token %}
-                <input type="hidden" value="{{user.username}}" name="follower" />
-                <input type="hidden" value="{{followee.username}}" name="followee" />
+                <input type="hidden" value="{{user.id}}" name="follower" />
+                <input type="hidden" value="{{followee.id}}" name="followee" />
 
                 <input class="follow-submit" type="submit" aria-label="follow-button" Value="{{ cta_text }}"/>
             </form>
@@ -20,8 +20,8 @@
     
     <div class="basic-info">
         <span><b>Number of posts:</b> {{ user_no_posts}}</span>
-        <span><b>Number of followers:</b> {{ profile_followers }}</span>
-        <span><b>Number following:</b> {{ profiles_following }}</span>
+        <span><b>Number of followers:</b> {{ no_followers }}</span>
+        <span><b>Number following:</b> {{ no_following }} </span>
     </div>
     <section class="bio-avatar flex-wrapper">
         <div class="bio">
@@ -34,9 +34,6 @@
         <h2>{{ user_profile.user.username }}'s Posts</h2>
         {% for post in user_posts reversed %}
             <div class="post">
-                {% if user == followee %}
-                <a href="#" class="edit-post"><i class="fa fa-edit"></i> Edit</a>
-                {% endif %}
                 <div class="flex-wrapper">
                     <a class="post-creator" href="#">@{{ post.user }}</a>
                     <span>{{ post.timestamp }}</span>

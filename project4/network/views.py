@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 # from django.views.generic import ListView
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from .models import User, Profile, Post, Like, Follower
+from .models import User, Profile, Post, Like
 
 # class PostListView(ListView):
 #     paginate_by = 10
@@ -64,7 +64,7 @@ def comment(request):
 @login_required(login_url='login')
 def edit_comment(request):
     if request.method == "POST":
-        post_id = request.POST.get("post.id")
+        post_id = request.POST.get("post-id")
         print(post_id)
         post = Post.objects.get(id = post_id)
         post.body = request.POST["body"]
@@ -76,21 +76,22 @@ def edit_comment(request):
 
 @login_required(login_url='login')
 def profile(request, user_id):
-    target_user = User.objects.get(id = user_id)
-    user_profile = Profile.objects.get(user = target_user)
-    user_posts = Post.objects.filter(user = target_user)
+    profile_user = User.objects.get(id = user_id)
+    user_profile = Profile.objects.get(user = profile_user)
+    user_posts = Post.objects.filter(user = profile_user)
     user_no_posts = len(user_posts)
+    no_followers = profile_user.followers.count()
+    no_following = User.objects.filter(following = profile_user).count()
+    
+    print(no_followers, no_following)
 
     follower = request.user
-    followee = target_user
+    followee = profile_user
 
-    if Follower.objects.filter(follower = follower, user = followee).first():
+    if profile_user in follower.following.all():
         cta_text = "Unfollow"
     else:
         cta_text = "Follow"
-
-    profile_followers = len(Follower.objects.filter(user=user_id))
-    profiles_following = len(Follower.objects.filter(follower=user_id))
 
     return render(request, "network/profile.html", {
         "followee": followee,
@@ -99,57 +100,41 @@ def profile(request, user_id):
         "user_posts": user_posts,
         "user_no_posts": user_no_posts,
         "cta_text": cta_text,
-        "profile_followers": profile_followers,
-        "profiles_following": profiles_following
+        "no_followers": no_followers,
+        "no_following": no_following
     })
 
 @login_required(login_url='login')
 def follow(request):
     if request.method == "POST":
-        follower = request.POST["follower"]
-        followee = request.POST["followee"]
-
-        if Follower.objects.filter(follower = follower, user = followee).first():
-            delete_follower = Follower.objects.get(follower = follower, user = followee)
-            delete_follower.delete()
-            return HttpResponseRedirect(reverse("profile/"+followee))
+        follower_id = request.POST["follower"]
+        followee_id = request.POST["followee"]
+        print(follower_id, " ", followee_id)
+        follower = User.objects.get(id = follower_id)
+        followee = User.objects.get(id = followee_id)
+        
+        if User.objects.filter(following = follower):
+            remove_follower = User.objects.get(following = follower)
+            remove_follower.following.remove(follower)
+            return HttpResponseRedirect(reverse("profile/" + followee_id))
         else:
-            new_follower = Follower.objects.create(follower = follower, user = followee)
-            new_follower.save()
-            return HttpResponseRedirect(reverse("profile/"+followee))
+            new_follower = User.objects.get(id = followee_id).following.add(follower)
+            return HttpResponseRedirect(reverse("profile/" + followee_id))
 
     else:
      return redirect('/')
 
-# @login_required(login_url='login')
-# def follow(request, user_id):
-#     follower = request.user
-
-#     follow_check = Follow.objects.get(follower = follower, user = user_id)
-
-#     if follow_check == None:
-#         new_follow = Follow.objects.create(follower = follower, user = user_id)
-#         new_follow.save()
-#         cta_text = "Unfollow"
-        
-#     else:
-#         follow_check.delete()
-#         cta_text = "Follow"
-
-#     return render(request, "network/index", {
-#         "cta_text": cta_text
-#     })
-
 @login_required(login_url='login')
 def following(request):
-    stalking = Follower.objects.filter(follower = request.user)
-    followee = stalking.user
-    posts = Post.objects.filter(user = followee)
-    return render(request, "network/following.html", {
-        "stalking": stalker,
-        "followee": followee,
-        "posts": posts
-    })
+    pass
+#     stalking = Follower.objects.filter(follower = request.user)
+#     followee = stalking.user
+#     posts = Post.objects.filter(user = followee)
+#     return render(request, "network/following.html", {
+#         "stalking": stalker,
+#         "followee": followee,
+#         "posts": posts
+#     })
 
 @login_required(login_url='login')
 def like(request, post_id):

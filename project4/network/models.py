@@ -3,7 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    following = models.ManyToManyField("User", blank=True, default=[0], related_name="followers")
 
 class Profile(models.Model):
     user = models.ForeignKey("User", on_delete=models.CASCADE, related_name="profiles")
@@ -33,9 +33,9 @@ class Like(models.Model):
     def __str__(self):
         return self.fan
 
-class Follower(models.Model):
-    follower = models.ForeignKey("User", on_delete=models.CASCADE, related_name="followers")
-    user = models.ForeignKey("User", on_delete=models.CASCADE, related_name="followees")
+# class Follower(models.Model):
+#     follower = models.ForeignKey("User", on_delete=models.CASCADE, related_name="followers")
+#     user = models.ForeignKey("User", on_delete=models.CASCADE, related_name="followees")
 
-    def __str__(self):
-        return self.user
+#     def __str__(self):
+#         return self.user
