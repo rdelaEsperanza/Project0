@@ -314,6 +314,15 @@ html {
     position: relative;
   }
 
+  .feed.profile .flex-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .feed.profile .post {
+    width: 40rem;
+    margin: 0 2rem 2rem 0;
+  }
+
   .feed .post a.edit-post {
     position: absolute;
     font-size: 1.4rem;

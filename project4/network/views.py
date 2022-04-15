@@ -115,26 +115,25 @@ def follow(request):
         
         if User.objects.filter(following = follower):
             remove_follower = User.objects.get(following = follower)
-            remove_follower.following.remove(follower)
-            return HttpResponseRedirect(reverse("profile/" + followee_id))
+            remove_follower.following.clear()
+            return HttpResponseRedirect(reverse("profile", args=(followee_id,)))
         else:
             new_follower = User.objects.get(id = followee_id).following.add(follower)
-            return HttpResponseRedirect(reverse("profile/" + followee_id))
+            return HttpResponseRedirect(reverse("profile", args=(followee_id,)))
 
     else:
      return redirect('/')
 
 @login_required(login_url='login')
-def following(request):
-    pass
-#     stalking = Follower.objects.filter(follower = request.user)
-#     followee = stalking.user
-#     posts = Post.objects.filter(user = followee)
-#     return render(request, "network/following.html", {
-#         "stalking": stalker,
-#         "followee": followee,
-#         "posts": posts
-#     })
+def following(request, user_id):
+    user = User.objects.get(id = user_id)
+    user_following = User.objects.filter(following_in = user)
+    posts = Post.objects.filter(user = user_following)
+    return render(request, "network/following.html", {
+        "user": user,
+        "user_following": user_following,
+        "posts": posts
+    })
 
 @login_required(login_url='login')
 def like(request, post_id):

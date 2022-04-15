@@ -30,29 +30,24 @@
             <p>Rutrum tellus pellentesque eu tincidunt tortor. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet. Tempor orci eu lobortis elementum nibh tellus molestie nunc. Amet volutpat consequat mauris nunc congue nisi vitae suscipit. Orci sagittis eu volutpat odio facilisis mauris sit amet. Enim ut sem viverra aliquet eget sit. Enim sit amet venenatis urna cursus eget nunc. Sit amet massa vitae tortor condimentum lacinia. Vitae nunc sed velit dignissim sodales ut eu. Gravida neque convallis a cras. Sit amet dictum sit amet justo donec enim. Mauris sit amet massa vitae tortor condimentum lacinia quis vel. Magna etiam tempor orci eu. Id volutpat lacus laoreet non curabitur gravida arcu. In est ante in nibh mauris cursus. Ut enim blandit volutpat maecenas volutpat blandit. Dis parturient montes nascetur ridiculus. Duis at consectetur lorem donec massa sapien. Feugiat pretium nibh ipsum consequat nisl.</p>
         </div>
     </section>
-    <section class="feed">
-        <h2>{{ user_profile.user.username }}'s Posts</h2>
-        {% for post in user_posts reversed %}
-            <div class="post">
-                <div class="flex-wrapper">
-                    <a class="post-creator" href="#">@{{ post.user }}</a>
-                    <span>{{ post.timestamp }}</span>
+    <section class="feed profile">
+        <h2>@{{ user_profile.user.username }}'s Posts</h2>
+        <div class="flex-wrapper">
+            {% for post in user_posts reversed %}
+                <div class="post">
+                    <div class="flex-wrapper">
+                        <a class="post-creator" href="#">@{{ post.user }}</a>
+                        <span>{{ post.timestamp }}</span>
+                    </div>
+                    <p id="posted" class="posted">{{ post.body }}</p>
                 </div>
-                <p id="posted" class="posted">{{ post.body }}</p>
-                <form class="edit-form" id="editForm">
-                    {% csrf_token %}
-                    <label>
-                        <b class="visuallyhidden">Comment</b>
-                        <textarea id="editBody" name="body">{{ user_posts.body }}</textarea>
-                    </label>
-                    <input type="submit" aria-label="submit comment" Value="Submit"/>
-                </form>
-            </div>
-        {% empty %}
-            <div>
-                No posts found
-            </div>
-        {% endfor %}
+            {% empty %}
+                <div>
+                    No posts found
+                </div>
+            {% endfor %}
+        </div>
+        
     </section>
 </main>
 
