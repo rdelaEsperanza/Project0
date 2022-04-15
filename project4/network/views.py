@@ -116,9 +116,11 @@ def follow(request):
         if User.objects.filter(following = follower):
             remove_follower = User.objects.get(following = follower)
             remove_follower.following.remove(follower)
+            remove_follower.save()
             return HttpResponseRedirect(reverse("profile", args=(followee_id,)))
         else:
             new_follower = User.objects.get(id = followee_id).following.add(follower)
+            new_follower.following.save()
             return HttpResponseRedirect(reverse("profile", args=(followee_id,)))
 
     else:
