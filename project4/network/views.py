@@ -114,22 +114,20 @@ def follow(request):
         followee = User.objects.get(id = followee_id)
         
         if User.objects.filter(following = follower):
-            remove_follower = User.objects.get(following = follower)
-            remove_follower.following.remove(follower)
-            remove_follower.save()
+            followee.followers.remove(request.user)
             return HttpResponseRedirect(reverse("profile", args=(followee_id,)))
         else:
-            new_follower = User.objects.get(id = followee_id).following.add(follower)
-            new_follower.following.save()
+            new_follower = followee.followers.add(request.user)
             return HttpResponseRedirect(reverse("profile", args=(followee_id,)))
 
     else:
      return redirect('/')
 
 @login_required(login_url='login')
-def following(request, user_id):
-    user = User.objects.get(id = user_id)
-    user_following = User.objects.filter(following_in = user)
+def following(request):
+    user = User.objects.get(id = request.user.id)
+    user_following = User.objects.filter(followers = user)
+    # user_following = User.objects.filter(id__in = user.following.all())
     posts = Post.objects.filter(user = user_following)
     return render(request, "network/following.html", {
         "user": user,
