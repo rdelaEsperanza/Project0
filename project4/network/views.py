@@ -91,7 +91,7 @@ def profile(request, user_id):
         user_no_posts = "none"
         no_followers = "none"
         no_following = "none"
-        
+
     follower = request.user
     followee = profile_user
 
@@ -134,13 +134,10 @@ def follow(request):
 @login_required(login_url='login')
 def following(request):
     user = User.objects.get(id = request.user.id)
-    user_following = User.objects.filter(followers = user)
-    # user_following = User.objects.filter(id = user.following.all())
-    posts = Post.objects.all(user = user_following)
-    print(posts)
+    posts = Post.objects.filter(user__in = user.following.all())
     return render(request, "network/following.html", {
         "user": user,
-        "user_following": user_following,
+        # "user_following": user_following,
         "posts": posts
     })
 
