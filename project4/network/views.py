@@ -77,14 +77,21 @@ def edit_comment(request):
 @login_required(login_url='login')
 def profile(request, user_id):
     profile_user = User.objects.get(id = user_id)
-    user_profile = Profile.objects.get(user = profile_user)
-    user_posts = Post.objects.filter(user = profile_user)
-    user_no_posts = len(user_posts)
-    no_followers = profile_user.followers.count()
-    no_following = User.objects.filter(following = profile_user).count()
-    
-    print(no_followers, no_following)
-
+    if Profile.objects.filter(user = profile_user).exists():
+        user_profile = Profile.objects.get(user = profile_user)
+        user_posts = Post.objects.filter(user = profile_user)
+        user_no_posts = len(user_posts)
+        no_followers = profile_user.followers.count()
+        no_following = User.objects.filter(following = profile_user).count()
+        
+        print(no_followers, no_following)
+    else:
+        user_profile = "none"
+        user_posts = "none"
+        user_no_posts = "none"
+        no_followers = "none"
+        no_following = "none"
+        
     follower = request.user
     followee = profile_user
 
@@ -128,8 +135,9 @@ def follow(request):
 def following(request):
     user = User.objects.get(id = request.user.id)
     user_following = User.objects.filter(followers = user)
-    # user_following = User.objects.filter(id__in = user.following.all())
-    posts = Post.objects.filter(user = user_following)
+    # user_following = User.objects.filter(id = user.following.all())
+    posts = Post.objects.all(user = user_following)
+    print(posts)
     return render(request, "network/following.html", {
         "user": user,
         "user_following": user_following,
