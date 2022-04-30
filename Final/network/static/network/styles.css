@@ -314,6 +314,12 @@ html {
     position: relative;
   }
 
+  .feed .post img {
+    max-width: 300px;
+    display:block;
+    margin-bottom: 2rem;
+  }
+
   .feed.profile .flex-wrapper {
     flex-wrap: wrap;
   }
