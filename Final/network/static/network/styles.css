@@ -276,12 +276,18 @@ html {
   }
 
   .basic-info {
+    font-size: 2rem;
+    font-weight: 600;
     display:flex;
     justify-content: space-between;
     padding: 2rem;
     margin-top: -2rem;
     background-color: rgba(255, 255, 255, 0.8);
+  }
 
+  .basic-info span b {
+    font-size: 1.5rem;
+    font-weight: 400;
   }
 
   .bio-avatar {
@@ -327,6 +333,13 @@ html {
   .feed.profile .post {
     width: 40rem;
     margin: 0 2rem 2rem 0;
+  }
+
+  .feed.profile .post img {
+    max-width: 200px;
+    display:block;
+    margin-bottom: 0;
+    border: thin solid #dddddd;
   }
 
   .feed .post a.edit-post {

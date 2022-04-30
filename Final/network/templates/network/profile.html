@@ -20,9 +20,9 @@
                 {% endif %}
             </h1>
             <div class="basic-info">
-                <span><b>Number of posts:</b> {{ user_no_posts}}</span>
-                <span><b>Number of followers:</b> {{ no_followers }}</span>
-                <span><b>Number following:</b> {{ no_following }} </span>
+                <span><b># Posts:</b> {{ user_no_posts}}</span>
+                <span><b># Followers:</b> {{ no_followers }}</span>
+                <span><b># Following:</b> {{ no_following }} </span>
             </div>
             <section class="bio-avatar flex-wrapper">
                 <div class="bio">
@@ -41,6 +41,7 @@
                                 <span>{{ post.timestamp }}</span>
                             </div>
                             <p id="posted" class="posted">{{ post.body }}</p>
+                            <img src="{{post.image.url}}" alt="post image">
                         </div>
                     {% empty %}
                         <div>

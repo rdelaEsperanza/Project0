@@ -16,7 +16,7 @@ def index(request):
     post_list = Post.objects.all()
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(post_list, 10)
+    paginator = Paginator(post_list, 5)
 
     try:
         posts = paginator.page(page)
