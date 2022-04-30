@@ -364,6 +364,33 @@ html {
     font-size: 1.6rem;
   }
 
+  .feed ul.pagination {
+    list-style-type: none;
+  }
+
+  .feed .pagination a {
+    color: #325794;
+  }
+
+  .feed .pagination b {
+    font-weight: 400;
+    padding: .5rem 1rem;
+    background-color: white;
+
+  }
+
+  .feed ul.pagination li {
+    display: inline-block;
+  }
+
+  .feed .pagination i {
+    margin: 0 1rem;
+  }
+
+  .feed ul.pagination li.disabled {
+    opacity: .25;
+  }
+
   .credit {
     position: absolute;
     top: -4rem;

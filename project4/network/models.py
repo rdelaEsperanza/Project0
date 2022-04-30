@@ -14,6 +14,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
     user = models.ForeignKey("User", on_delete=models.CASCADE, related_name="posts")
+    image = models.ImageField(upload_to='images', default='images/default.jpg')
     body = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     no_likes = models.IntegerField(default=0)

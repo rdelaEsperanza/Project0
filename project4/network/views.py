@@ -3,28 +3,30 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.core.paginator import Paginator
-# from django.views.generic import ListView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from .models import User, Profile, Post, Like
 
-# class PostListView(ListView):
-#     paginate_by = 10
-#     model = Post
 
 @login_required(login_url='login')
 def index(request):
 
-    posts = Post.objects.all()
-    # post_list = Post.objects.all()
-    # paginator = Paginator(post_list, 10)
+    # posts = Post.objects.all()
+    post_list = Post.objects.all()
+    page = request.GET.get('page', 1)
 
-    # page_number = request.GET.get("page")
-    # page_obj = paginator.get_page(page_number)
+    paginator = Paginator(post_list, 10)
+
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
 
     return render(request, "network/index.html", {'posts':posts})
-    # return render(request, "network/index.html", {"page_obj" : page_obj})
 
 
 
@@ -53,8 +55,8 @@ def comment(request):
     if request.method == "POST":
         user = request.user
         body = request.POST["body"]
-
-        new_post = Post.objects.create(user=user, body=body)
+        image = request.POST.get('post_image')
+        new_post = Post.objects.create(user=user, body=body, image=image)
         new_post.save()
 
         return HttpResponseRedirect(reverse("index"))
