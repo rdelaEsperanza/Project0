@@ -1,0 +1,26 @@
+{% extends "network/layout.html" %}
+{% block title %}
+    Following
+{% endblock %}
+{% block body %}
+    <main>
+        <h1>{{ user }} Following Feed</h1>
+        <section class="feed following">
+            <div class="flex-wrapper">
+                {% for post in posts reversed %}
+                    <div class="post">
+                        <div class="flex-wrapper">
+                            <a class="post-creator" href="#">@{{ post.user }}</a>
+                            <span>{{ post.timestamp }}</span>
+                        </div>
+                        <p id="posted" class="posted">{{ post.body }}</p>
+                    </div>
+                {% empty %}
+                    <div>
+                        No posts found
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

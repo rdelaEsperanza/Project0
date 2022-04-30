@@ -1,0 +1,54 @@
+{% extends "network/layout.html" %}
+{% block title %}
+    Profile: {{ followee.username }}
+{% endblock %}
+{% block body %}
+    <main>
+        {% if user_profile == "none" %}
+            <h1>New User - No Profile Exists</h1>
+        {% else %}
+            <h1 class="profile">
+                Profile: {{ followee.username }}
+                {% if follower.username != followee.username %}
+                    <form class="unflex" action="follow" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{user.id}}" name="follower" />
+                        <input type="hidden" value="{{followee.id}}" name="followee" />
+
+                        <input class="follow-submit" type="submit" aria-label="follow-button" Value="{{ cta_text }}"/>
+                    </form>
+                {% endif %}
+            </h1>
+            <div class="basic-info">
+                <span><b>Number of posts:</b> {{ user_no_posts}}</span>
+                <span><b>Number of followers:</b> {{ no_followers }}</span>
+                <span><b>Number following:</b> {{ no_following }} </span>
+            </div>
+            <section class="bio-avatar flex-wrapper">
+                <div class="bio">
+                    <h2>Bio</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mollis aliquam ut porttitor leo. Tellus at urna condimentum mattis pellentesque. Et netus et malesuada fames ac turpis egestas sed tempus. Orci dapibus ultrices in iaculis. Sed enim ut sem viverra aliquet eget sit amet. Laoreet non curabitur gravida arcu ac tortor dignissim convallis. Et malesuada fames ac turpis egestas maecenas pharetra. Lacus luctus accumsan tortor posuere ac ut consequat. Vehicula ipsum a arcu cursus vitae congue mauris. Quis hendrerit dolor magna eget est lorem ipsum dolor sit. Dolor magna eget est lorem ipsum dolor sit amet consectetur. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien. Tempus imperdiet nulla malesuada pellentesque elit eget. Mattis nunc sed blandit libero volutpat sed cras ornare arcu. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies.</p>
+                    <p>Rutrum tellus pellentesque eu tincidunt tortor. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet. Tempor orci eu lobortis elementum nibh tellus molestie nunc. Amet volutpat consequat mauris nunc congue nisi vitae suscipit. Orci sagittis eu volutpat odio facilisis mauris sit amet. Enim ut sem viverra aliquet eget sit. Enim sit amet venenatis urna cursus eget nunc. Sit amet massa vitae tortor condimentum lacinia. Vitae nunc sed velit dignissim sodales ut eu. Gravida neque convallis a cras. Sit amet dictum sit amet justo donec enim. Mauris sit amet massa vitae tortor condimentum lacinia quis vel. Magna etiam tempor orci eu. Id volutpat lacus laoreet non curabitur gravida arcu. In est ante in nibh mauris cursus. Ut enim blandit volutpat maecenas volutpat blandit. Dis parturient montes nascetur ridiculus. Duis at consectetur lorem donec massa sapien. Feugiat pretium nibh ipsum consequat nisl.</p>
+                </div>
+            </section>
+            <section class="feed profile">
+                <h2>@{{ user_profile.user.username }}'s Posts</h2>
+                <div class="flex-wrapper">
+                    {% for post in user_posts reversed %}
+                        <div class="post">
+                            <div class="flex-wrapper">
+                                <a class="post-creator" href="#">@{{ post.user }}</a>
+                                <span>{{ post.timestamp }}</span>
+                            </div>
+                            <p id="posted" class="posted">{{ post.body }}</p>
+                        </div>
+                    {% empty %}
+                        <div>
+                            No posts found
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}

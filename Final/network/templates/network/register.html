@@ -1,0 +1,41 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <main>
+        <section class="register">
+            <h2>Register</h2>
+
+            {% if message %}
+                <div>{{ message }}</div>
+            {% endif %}
+
+            <form class="register-form" action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+                <label>
+                    <b class="visuallyhidden">username</b>
+                    <input autofocus type="text" name="username" placeholder="Username">
+                </label>
+                <label>
+                    <b class="visuallyhidden">email</b>
+                    <input type="email" name="email" placeholder="Email Address">
+                </label>
+                <label>
+                    <b class="visuallyhidden">password</b>
+                    <input type="password" name="password" placeholder="Password">
+                </label>
+                <label>
+                    <b class="visuallyhidden">confirm password</b>
+                    <input type="password" name="confirmation" placeholder="Confirm Password">
+                </label>
+                <label>
+                    <b class="visuallyhidden">submit</b>
+                    <input type="submit" value="Register">
+                </label>
+                
+            </form>
+
+            <p>Already have an account? <a href="{% url 'login' %}">Log In here.</a></p>
+        </section>
+        
+    </main>
+{% endblock %}
