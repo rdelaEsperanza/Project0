@@ -55,7 +55,7 @@ def comment(request):
     if request.method == "POST":
         user = request.user
         body = request.POST["body"]
-        image = request.POST.get('post_image')
+        image = request.FILES.get('post_image')
         new_post = Post.objects.create(user=user, body=body, image=image)
         new_post.save()
 
