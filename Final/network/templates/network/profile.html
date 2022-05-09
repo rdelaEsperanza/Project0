@@ -8,7 +8,7 @@
             <h1>New User - No Profile Exists</h1>
         {% else %}
             <h1 class="profile">
-                Profile: {{ followee.username }}
+                {{ followee.username }}'s Profile
                 {% if follower.username != followee.username %}
                     <form class="unflex" action="follow" method="POST">
                         {% csrf_token %}

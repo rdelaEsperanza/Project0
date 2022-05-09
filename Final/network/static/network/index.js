@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    // By default, load all messages 
+    load_mailbox('all');
+
     document.addEventListener('click', event => {
 
         // Find what was clicked on
@@ -14,15 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-     // Use buttons to toggle between views
-    document.querySelector('#all').addEventListener('click', () => load_mailbox('all'));
-    // document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
-    // document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
+     // Use buttons to access Compose and send new message
+    // document.querySelector('#all').addEventListener('click', () => load_mailbox('all'));
     document.querySelector('#compose').addEventListener('click', compose_email);
     document.querySelector('#compose-form').addEventListener('submit', send_email);
 
-    // By default, load all messages mailbox
-    load_mailbox('all');
+    
 });
 
 function compose_email() {
@@ -140,7 +140,7 @@ function compose_email() {
         var listing = document.querySelector('#emails-view');
         
         listing.innerHTML = `
-        <h2>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h2>
+        
         <table>
           <tr class="email headers">
             <th class="email-id"> DM ID </th>
