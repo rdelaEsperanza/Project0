@@ -1,0 +1,48 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <main class="email-home">
+        <h1>Account: <span>{{ request.user.email }}</span></h1>
+        <div class="flex-wrapper mailboxes">
+            <button class="tertiary" id="all">All Messages</button>
+            <button class="tertiary" id="compose">Compose</button>
+            <!-- <button class="tertiary" id="sent">Sent</button>
+            <button class="tertiary" id="archived">Archived</button> -->
+          
+        </div>
+
+
+        <div id="emails-view" class="emails">
+            
+        </div>
+
+        <div id="compose-view">
+            <h2>Compose New email</h2>
+            <form id="compose-form">
+                <label class="sender">
+                    <b>From: </b>
+                    <input disabled value="{{ request.user.email }}">
+                </label>
+                <label class="recipient">
+                    <b>To: </b>
+                    <input id="compose-recipients">
+                </label>
+                <label class="email-body">
+                    <b>Message: </b>
+                    <textarea id="compose-body"></textarea>
+                </label>
+                
+                <input type="submit" aria-label="send dm" Value="Send DM"/>
+            </form>
+        </div>
+
+        <div id="read-email-view">
+        </div>        
+    </main>
+    
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}

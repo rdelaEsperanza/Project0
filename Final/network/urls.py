@@ -13,5 +13,10 @@ urlpatterns = [
     path("following", views.following, name="following"),
     path("like/<int:post_id>", views.like, name="like"),
     path("comment", views.comment, name="comment"),
-    path("edit_comment", views.edit_comment, name="edit_comment")
+    path("edit_comment", views.edit_comment, name="edit_comment"),
+    path("inbox", views.inbox, name="inbox"),
+    path("emails", views.compose, name="compose"),
+    path("emails/<int:email_id>", views.email, name="email"),
+    path("emails/<str:mailbox>", views.mailbox, name="mailbox"),
+
 ]
