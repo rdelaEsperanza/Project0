@@ -2,18 +2,18 @@
 {% load static %}
 
 {% block body %}
-    <main class="email-home">
+    <main class="messages-home">
         <h1>{{ user }}'s Messages</h1>
-        <div class="flex-wrapper" style="justify-content: flex-end;">
+        <div class="flex-wrapper">
             <!-- <button class="tertiary" id="all">All Messages</button> -->
-            <button class="tertiary" id="compose">Compose</button>
+            <button class="tertiary" id="compose">Send a Message</button>
             <!-- <button class="tertiary" id="sent">Sent</button>
             <button class="tertiary" id="archived">Archived</button> -->
           
         </div>
 
 
-        <div id="emails-view" class="emails">
+        <div id="messages-view" class="messages">
             
         </div>
 
@@ -28,21 +28,17 @@
                     <b>To: </b>
                     <input id="compose-recipients">
                 </label>
-                <label class="email-body">
+                <label class="compose-body">
                     <b>Message: </b>
                     <textarea id="compose-body"></textarea>
                 </label>
                 
-                <input type="submit" aria-label="send dm" Value="Send DM"/>
+                <input type="submit" aria-label="send dm" Value="Send Message"/>
             </form>
         </div>
 
-        <div id="read-email-view">
+        <div id="read-message-view">
         </div>        
     </main>
     
-{% endblock %}
-
-{% block script %}
-    <script src="{% static 'mail/inbox.js' %}"></script>
 {% endblock %}

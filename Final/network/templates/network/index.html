@@ -1,7 +1,7 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    <main>
+    <main class="index">
         <h1>Welcome Home, {{ request.user }} </h1>
         <div class="flex-wrapper home">
             <section class="post-comment">
@@ -95,7 +95,9 @@
                 </ul>
                 {% endif %}
             </section>
-        </div>  
+        </div>
+        <p class="credit">Photo by <a href="https://unsplash.com/@frostroomhead?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Rodion Kutsaev (Ukraine)</a> on <a href="https://unsplash.com/s/photos/networking?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+        </p>  
     </main>
 
 {% endblock %}

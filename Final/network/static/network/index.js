@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
      // Use buttons to access Compose and send new message
-    // document.querySelector('#all').addEventListener('click', () => load_mailbox('all'));
     document.querySelector('#compose').addEventListener('click', compose_email);
     document.querySelector('#compose-form').addEventListener('submit', send_email);
 
@@ -27,9 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function compose_email() {
 
-    // Show compose view and hide other views
-    document.querySelector('#emails-view').style.display = 'none';
-    document.querySelector('#read-email-view').style.display = 'none';
+    // Show compose view and hide other views and compose button
+    document.querySelector('#messages-view').style.display = 'none';
+    document.querySelector('#read-message-view').style.display = 'none';
+    document.querySelector('#compose').style.display = 'none';
     document.querySelector('#compose-view').style.display = 'block';
   
     // Clear out composition fields
@@ -54,33 +54,35 @@ function compose_email() {
   function load_email(id) {
   
     // Show read-email-view and hide others
-    document.querySelector('#emails-view').style.display = 'none';
+    document.querySelector('#messages-view').style.display = 'none';
     document.querySelector('#compose-view').style.display = 'none';
-    document.querySelector('#read-email-view').style.display = 'block';
+    document.querySelector('#read-message-view').style.display = 'block';
   
     fetch('/emails/' + id)
       .then(response => response.json())
       .then(email => {
       console.log(email);
-      // Render read-email-view
-      var readone = document.querySelector('#read-email-view');
+      // Render read-message-view
+      var readone = document.querySelector('#read-message-view');
       readone.innerHTML = `
-      <div class="email-info">
+      <div class="message-info">
         <div class="pseudo-label">
             <b>ID: </b>
             <u>${email.id}</u>
           </div>
-          <div class="pseudo-label">
-            <b>From: </b>
-            <u>${email.sender}</u>
-          </div>
-          <div class="pseudo-label">
-            <b>To: </b>
-            <u>${email.recipients}</u>
-          </div>
-          <div class="pseudo-label">
-            <b>Timestamp: </b>
-            <u>${email.timestamp}</u>
+          <div class="flex-wrapper from-to">
+            <div class="pseudo-label">
+                <b>From: </b>
+                <u>${email.sender}</u>
+            </div>
+            <div class="pseudo-label">
+                <b>To: </b>
+                <u>${email.recipients}</u>
+            </div>
+            <div class="pseudo-label">
+                <b>Date: </b>
+                <u>${email.timestamp}</u>
+            </div>
           </div>
           <div class="pseudo-label">
             <b>Message: </b>
@@ -109,27 +111,15 @@ function compose_email() {
         //add reply button to message
         readone.appendChild(replyButton);
   
-        //allow user to archive email and return to inbox
-        // var archiveButton = document.createElement('button');
-        // archiveButton.classList.add('tertiary');
-        // archiveButton.innerHTML = !email.archived ? `<i class="fa fa-archive"></i> Archive` : `<i class=" fa fa-box-open"></i> Unarchive`;
-        // archiveButton.addEventListener('click', () => {
-        //     fetch('/emails/' + email.id, {
-        //       method: 'PUT',
-        //       body: JSON.stringify({ archived: true })
-        //     })
-        //       .then(response => load_mailbox('all'));
-        //   });
-        // readone.appendChild(archiveButton);
     });
   }
   
   function load_mailbox(mailbox) {
     
     // Show the mailbox and hide other views
-    document.querySelector('#emails-view').style.display = 'block';
+    document.querySelector('#messages-view').style.display = 'block';
     document.querySelector('#compose-view').style.display = 'none';
-    document.querySelector('#read-email-view').style.display = 'none';
+    document.querySelector('#read-message-view').style.display = 'none';
   
    
     fetch('/emails/' + mailbox)
@@ -137,16 +127,15 @@ function compose_email() {
       .then(emails => {
         console.log(emails)
         // create html for individual emails and populate with email summary content
-        var listing = document.querySelector('#emails-view');
+        var listing = document.querySelector('#messages-view');
         
         listing.innerHTML = `
         
         <table>
-          <tr class="email headers">
-            <th class="email-id"> DM ID </th>
+          <tr class="message headers">
             <th class="sender"> From </th>
             <th class="recipient"> To </th>
-            <th class="timestamp"> Timestamp </th>
+            <th class="timestamp"> Date </th>
           </tr>
         </table>
         `;
@@ -159,7 +148,6 @@ function compose_email() {
           }
           tr.innerHTML = 
             `
-              <td class="email-id"> ${email.id} </td>
               <td class="sender"> ${email.sender} </td>
               <td class="recipient"> ${email.recipients} </td>
               <td class="timestamp"> ${email.timestamp}</td>

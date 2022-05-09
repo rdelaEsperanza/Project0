@@ -107,7 +107,7 @@ html {
   button.tertiary {
     background-color: white;
     border: thin solid #325794;
-    color: #b2e4f9;
+    color: #325794;
     margin: 0.5rem;
     padding: 1rem 3rem;
     border-radius: 0.25rem;
@@ -234,17 +234,83 @@ html {
   .main-content-wrapper {
     position: relative;
     min-height: calc(100vh - 19rem);
-    background-image: url('rodion-kutsaev-0VGG7cqTwCo-unsplash.jpg');
-    background-size: cover;
-    background-position: top 25% center;
-    background-repeat: no-repeat;
-    background-color: #5e42a6;
+    
     color: #0a060d;
   }
   
   main {
     padding: 2rem 2rem 4rem;
     position: relative;
+  }
+
+  main.index {
+    background-image: url('rodion-kutsaev-0VGG7cqTwCo-unsplash.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #101323;
+  }
+
+  main.profile {
+    background-image: url('majestic-lukas-SPVSeCN7p58-unsplash.jpg');
+    background-color: #050504;
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: top right;
+  }
+
+  main.messages-home {
+    background-image: url('hannah-wei-aso6SYJZGps-unsplash.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #180C3A;
+    min-height: calc(100vh - 19rem);
+  }
+
+  main.messages-home h1 {
+    text-align: right;
+  }
+
+  main.messages-home .message-info {
+    padding: 2rem;
+    background-color: rgba(255,255,255,.7);
+    border: thin solid white;
+    margin: 3rem;
+}
+
+main.messages-home .message-info .pseudo-label u {
+  text-decoration: none;
+}
+
+main.messages-home .message-info .flex-wrapper.from-to {
+  justify-content: space-between;
+  margin: 2rem 0;
+}
+
+  main.messages-home .messages table {
+    margin-left: auto;
+    background: rgba(255,255,255,.7);
+    padding: 1rem;
+  }
+  main.messages-home .messages table th, main.messages-home .messages table td {
+    text-align: left;
+    padding: .5rem;
+  }
+
+  main.messages-home .messages table td {
+    color: #325794;
+    cursor: pointer;
+  }
+
+  main.messages-home .messages table tr:hover td {
+    background-color: white;
+  }
+
+  main.following {
+    background-image: url('adam-gonzales-cfKwE7k9qqA-unsplash.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #180C3A;
+    min-height: calc(100vh - 19rem);
   }
 
   .login, .register {
@@ -278,10 +344,11 @@ html {
   .basic-info {
     font-size: 2rem;
     font-weight: 600;
+    width: 70%;
     display:flex;
     justify-content: space-between;
     padding: 2rem;
-    margin-top: -2rem;
+    margin-top: 6rem;
     background-color: rgba(255, 255, 255, 0.8);
   }
 
@@ -291,6 +358,7 @@ html {
   }
 
   .bio-avatar {
+    width: 70%;
     padding: 2rem;
     background-color: rgba(255, 255, 255, 0.9);
     border: thin solid white;
@@ -318,6 +386,8 @@ html {
     margin-bottom: 2rem;
     border: 0.5rem double #ddd;
     position: relative;
+    min-width: 40rem;
+    margin: 3rem;
   }
 
   .feed .post img {
@@ -348,6 +418,14 @@ html {
     color: #105fbd;
     right: 1rem;
     top: 1rem;
+  }
+
+  .feed.following {
+    margin-top: 25rem;
+  }
+
+  .feed.following .flex-wrapper {
+    flex-wrap: wrap;
   }
 
   form.edit-form {
@@ -412,9 +490,9 @@ html {
 
   .credit {
     position: absolute;
-    top: -4rem;
+    bottom: 0;
     left: 2rem;
-    margin: 0;
+    margin-top: 1rem;
     color: #d6ceec;
   }
 

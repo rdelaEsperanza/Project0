@@ -131,7 +131,7 @@ def compose(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)
 
-    # Check recipient emails
+    # Check recipient messages
     data = json.loads(request.body)
     emails = [email.strip() for email in data.get("recipients").split(",")]
     if emails == [""]:
@@ -150,10 +150,10 @@ def compose(request):
                 "error": f"User with email {email} does not exist."
             }, status=400)
 
-    # Get contents of email
+    # Get contents of message
     body = data.get("body", "")
 
-    # Create one email for each recipient, plus sender
+    # Create one message for each recipient, plus sender
     users = set()
     users.add(request.user)
     users.update(recipients)
@@ -174,30 +174,18 @@ def compose(request):
 @login_required
 def mailbox(request, mailbox):
 
-    # Filter emails returned based on mailbox
-    # if mailbox == "inbox":
-    #     emails = Email.objects.filter(
-    #         user=request.user, recipients=request.user, archived=False
-    #     )
-    # elif mailbox == "sent":
-    #     emails = Email.objects.filter(
-    #         user=request.user, sender=request.user
-    #     )
-    # elif mailbox == "archive":
-    #     emails = Email.objects.filter(
-    #         user=request.user, recipients=request.user, archived=True
-    #     )
 
-    # Filter messages based on user
+    # Filter messages based on whether sender or recipient is request.user
     
     if mailbox == "all":
         emails = Email.objects.filter(
-            (Q(sender=request.user) | Q(recipients=request.user))
+            # (Q(sender=request.user) | Q(recipients=request.user))
+            user=request.user
         )
     else:
         return JsonResponse({"error": "Invalid mailbox."}, status=400)
 
-    # Return emails in reverse chronologial order
+    # Return messages in reverse chronologial order
     emails = emails.order_by("-timestamp").all()
     return JsonResponse([email.serialize() for email in emails], safe=False)
 
